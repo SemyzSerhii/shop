@@ -5,4 +5,6 @@ class Product < ApplicationRecord
   validates :short_description, presence: true, length: { minimum: 10, maximum: 200 }
   validates :full_description, presence: true, length: { minimum: 20, maximum: 3000 }
 
+  has_many :reviews, dependent: :destroy
+
 end

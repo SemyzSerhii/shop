@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h2>
   <%= @product.title %>
-</p>
+</h2>
 
 <p>
   <strong>Price:</strong>
@@ -29,6 +28,18 @@
   <strong>In stock:</strong>
   <%= @product.in_stock %>
 </p>
+
+<h3 id="reviews">Reviews</h3>
+<% if @reviews.present? %>
+  <div class="reviews">
+    <%= render @reviews %>
+  </div>
+<% else %>
+  <p>No reviews.</p>
+<% end %>
+
+<h3>Add a review:</h3>
+<%= render 'reviews/form' %>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

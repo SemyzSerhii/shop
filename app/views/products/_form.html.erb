@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :short_description %>
-    <%= form.text_field :short_description %>
+    <%= form.text_area :short_description %>
   </div>
 
   <div class="field">
     <%= form.label :full_description %>
-    <%= form.text_field :full_description %>
+    <%= form.text_area :full_description %>
   </div>
 
   <div class="field">
@@ -37,8 +37,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :in_stock %>
     <%= form.check_box :in_stock %>
+    <%= form.label :in_stock %>
   </div>
 
   <div class="actions">
