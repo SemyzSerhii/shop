@@ -7,7 +7,6 @@
       <h5><%= link_to product.title, product %></h5>
         <p><%= product.price %></p>
         <p><%= product.short_description %></p>
-        <p><%= product.preview_image %></p>
     <% if current_user && current_user.role == 'admin' %>
       <ul class="product_action">
         <li><%= link_to 'Edit', edit_product_path(product) %></li>
