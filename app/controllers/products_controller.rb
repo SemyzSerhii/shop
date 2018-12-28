@@ -4,14 +4,14 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.all.select { |product| product.in_stock }
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
     @review = Review.new
-    @reviews = @product.reviews.find_by_status(true)
+    @reviews = @product.reviews.select { |review| review.status }
   end
 
   # GET /products/new

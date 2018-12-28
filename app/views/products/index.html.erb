@@ -2,36 +2,19 @@
 
 <h1>Products</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Price</th>
-      <th>Short description</th>
-      <th>Full description</th>
-      <th>Preview image</th>
-      <th>In stock</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="product">
     <% @products.each do |product| %>
-      <tr>
-        <td><%= product.title %></td>
-        <td><%= product.price %></td>
-        <td><%= product.short_description %></td>
-        <td><%= product.full_description %></td>
-        <td><%= product.preview_image %></td>
-        <td><%= product.in_stock %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <h5><%= link_to product.title, product %></h5>
+        <p><%= product.price %></p>
+        <p><%= product.short_description %></p>
+        <p><%= product.preview_image %></p>
+    <% if current_user && current_user.role == 'admin' %>
+      <ul class="product_action">
+        <li><%= link_to 'Edit', edit_product_path(product) %></li>
+        <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+      </ul>
     <% end %>
-  </tbody>
-</table>
-
-<br>
+    <% end %>
+</div>
 
 <%= link_to 'New Product', new_product_path %>
