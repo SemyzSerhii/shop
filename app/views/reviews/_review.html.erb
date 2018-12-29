@@ -1,11 +1,9 @@
-<p>
-  <strong>Rating:</strong>
-  <%= review.rating %>
-</p>
+<div class="review">
+  <p><%= review.rating %></p>
+  <p><%= review.text %></p>
 
-<p>
-  <strong>Text:</strong>
-  <%= review.text %>
-</p>
-<p><%= link_to 'Edit', edit_product_review_path(@product, review) %></p>
-<p><%= link_to 'Destroy', [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% if check_access(review) %>
+    <p><%= link_to 'Edit', edit_product_review_path(@product, review) %></p>
+    <p><%= link_to 'Destroy', [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
+</div>

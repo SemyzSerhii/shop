@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def check_access(item)
     if current_user
-      (current_user.access && current_user.id == item.user_id) || current_user.role == 'admin'
+      current_user.access && current_user.id == item.user_id
     else
       false
     end

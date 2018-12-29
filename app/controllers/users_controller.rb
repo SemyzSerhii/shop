@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update]
 
   def reviews
     if current_user
@@ -35,27 +35,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    data = current_user.role == 'admin' ? admin_params : user_params
-
-    respond_to do |format|
-      if @user.update(data)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    if current_user.role == 'admin'
-      @user.destroy
+    if check_access(@user)
       respond_to do |format|
-        format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-        format.json { head :no_content }
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     else
       redirect_access(root_path)
@@ -67,10 +55,9 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     if current_user
-      find_id = current_user.role == 'admin' ? params[:id] : current_user.id
-      @user = User.find(find_id)
+      @user = User.find(current_user.id)
     else
-      redirect_to root_path
+      redirect_access(root_path)
     end
 
   rescue ActiveRecord::RecordNotFound
@@ -80,9 +67,5 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:name, :email, :password)
-  end
-
-  def admin_params
-    params.require(:user).permit(:name, :email, :password, :access)
   end
 end

@@ -7,43 +7,57 @@ class ReviewsController < ApplicationController
     @review = Review.new
   end
 
+  def edit
+    redirect_access(root_path) unless check_access(@review)
+  end
+
   # POST /reviews
   # POST /reviews.json
   def create
-    params[:review][:user_id] = current_user.id
-    @review = @product.reviews.create(review_params)
-    @review.status = false
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to @product, notice: 'Review was successfully created.' }
-      else
-        format.html { render :_form}
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+    if current_user &.access
+      params[:review][:user_id] = current_user.id
+      @review = @product.reviews.create(review_params)
+      @review.status = false
+      respond_to do |format|
+        if @review.save
+          format.html { redirect_to @product, notice: 'Review was successfully created.' }
+        else
+          format.html { render :_form}
+        end
       end
+    else
+      redirect_access(@product)
     end
   end
 
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
   def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully updated.' }
-      else
-        format.html { render :_form }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+    if check_access(@review)
+      respond_to do |format|
+        @review.status = false
+        if @review.update(review_params)
+          format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully updated.' }
+        else
+          format.html { render :_form }
+        end
       end
+    else
+      redirect_access(root_path)
     end
   end
 
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
-    @review = @product.reviews.find(params[:id])
-    @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully destroyed.' }
-      format.json { head :no_content }
+    if check_access(@review)
+      @review = @product.reviews.find(params[:id])
+      @review.destroy
+      respond_to do |format|
+        format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully destroyed.' }
+      end
+    else
+      redirect_access(root_path)
     end
   end
 
@@ -52,10 +66,16 @@ class ReviewsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_review
     @review = Review.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 
   def set_product
     @product = Product.find(params[:product_id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

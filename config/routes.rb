@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   resources :users do
     member do
       get 'reviews'
     end
   end
 
-  resources :products do
+  resources :products, only: [:index, :show] do
     resources :reviews
   end
 

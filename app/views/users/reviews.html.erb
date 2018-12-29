@@ -1,5 +1,7 @@
 <h1>My reviews</h1>
 
+<%= render 'layouts/notice' %>
+
 <table>
   <thead>
   <tr>
@@ -17,7 +19,7 @@
       <td><%= link_to review.product.title, product_path(review.product.id) %></td>
       <td><%= review.rating %></td>
       <td><%= review.text %></td>
-      <td><%= review.status %></td>
+      <td><%= review.status ? 'Published' : 'Moderator`s Check' %></td>
       <td><%= link_to 'Edit', edit_product_review_path(review.product.id, review) %></td>
       <td><%= link_to 'Destroy', [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>

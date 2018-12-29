@@ -1,29 +1,25 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/notice' %>
+<%= render 'layouts/alert' %>
 
-<h2>
-  <%= @product.title %>
-</h2>
+<h2><%= @product.title %></h2>
 
 <p>
   <strong>Price:</strong>
   <%= @product.price %>
 </p>
 
-<p>
-  <%= @product.full_description %>
-</p>
+<p><%= @product.full_description %></p>
 
 <h3 id="reviews">Reviews</h3>
 <% if @reviews.present? %>
-  <div class="reviews">
-    <%= render @reviews %>
-  </div>
+  <div class="reviews"><%= render @reviews %></div>
 <% else %>
   <p>No reviews.</p>
 <% end %>
 
 <h3>Add a review:</h3>
-<%= render 'reviews/form' %>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<% if current_user %>
+  <%= render 'reviews/form' %>
+<% else %>
+  <p><%= link_to 'Log in', new_session_path %> or <%= link_to 'Sign up', new_user_path %> to leave a review.</p>
+<% end %>
