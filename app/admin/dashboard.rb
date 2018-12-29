@@ -10,6 +10,37 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
+    columns do
+      column do
+        panel "Recent Users" do
+          ul do
+            User.last(5).map do |user|
+              li link_to(user.name, admin_user_path(user))
+            end
+          end
+        end
+      end
+
+      column do
+        panel "Recent Reviews" do
+          ul do
+            Review.last(5).map do |review|
+              li link_to(review.rating, admin_review_path(review))
+            end
+          end
+        end
+      end
+
+      column do
+        panel "Recent Products" do
+          ul do
+            Product.last(5).map do |product|
+              li link_to(product.title, admin_product_path(product))
+            end
+          end
+        end
+      end
+    end
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do
