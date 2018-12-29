@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all.select { |product| product.in_stock }
+    @products = Product.all.select(&:in_stock)
   end
 
   # GET /products/1
@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @review = Review.new
-    @reviews = @product.reviews.select { |review| review.status }
+    @reviews = @product.reviews.select(&:status)
 
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path

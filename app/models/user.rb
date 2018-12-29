@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   scope :block, -> { where(access: false) }
   scope :unblock, -> { where(access: true) }
