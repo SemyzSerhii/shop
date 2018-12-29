@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_secure_password
   has_many :reviews
 
+  scope :block, -> { where(access: false) }
+  scope :unblock, -> { where(access: true) }
+
   validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true, presence: true
   validates :name, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, if: :password
