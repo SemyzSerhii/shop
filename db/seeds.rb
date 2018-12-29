@@ -7,4 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(name: 'Admin', email: 'admin@gmail.com', password: '1111aQ', access: true)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+Product.create(title: 'Product1', price: 1,
+               short_description: 'Lorem ipsum dolor sit amet, doming putent interpretaris sit te.',
+               full_description: 'Lorem ipsum dolor sit amet, doming putent interpretaris sit te.',
+               in_stock: true)
