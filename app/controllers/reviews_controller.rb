@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+
   before_action :set_review, only: [:edit, :update, :destroy]
   before_action :set_product, only: [:create, :edit, :update, :destroy]
 
@@ -19,7 +20,7 @@ class ReviewsController < ApplicationController
       @review = @product.reviews.create(review_params)
       @review.status = false
       respond_to do |format|
-        if @review.save
+        if verify_recaptcha(model: @review) && @review.save
           format.html { redirect_to @product, notice: 'Review was successfully created.' }
         else
           format.html { render :_form}
@@ -36,7 +37,7 @@ class ReviewsController < ApplicationController
     if check_access(@review)
       respond_to do |format|
         @review.status = false
-        if @review.update(review_params)
+        if verify_recaptcha(model: @review) && @review.update(review_params)
           format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully updated.' }
         else
           format.html { render :_form }
