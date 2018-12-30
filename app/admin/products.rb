@@ -12,7 +12,7 @@ ActiveAdmin.register Product do
 #   permitted
 # end
 
-  permit_params :title, :price, :short_description, :full_description, :in_stock
+  permit_params :title, :price, :short_description, :full_description, :in_stock, :category_id
 
   scope :all
   scope :publish

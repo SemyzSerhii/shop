@@ -28,6 +28,8 @@
     <% end %>
   </ul>
 
+  <%= nested_categories @categories.arrange %>
+
     <%= yield %>
   </body>
 </html>

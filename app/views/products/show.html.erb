@@ -10,6 +10,8 @@
 
 <p><%= @product.full_description %></p>
 
+<p><%= @product.category.title %></p>
+
 <h3 id="reviews">Reviews</h3>
 <% if @reviews.present? %>
   <div class="reviews"><%= render @reviews %></div>

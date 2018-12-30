@@ -3,7 +3,13 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all.select(&:in_stock)
+    if params[:category]
+      if @category = Category.find_by_title(params[:category])
+        @products = @category.products
+      end
+    else
+      @products = Product.all.select(&:in_stock)
+    end
   end
 
   # GET /products/1

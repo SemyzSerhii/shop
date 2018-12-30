@@ -66,3 +66,5 @@ gem 'activeadmin'
 gem 'devise'
 # for review form
 gem 'recaptcha'
+# for nested categories
+gem 'ancestry'

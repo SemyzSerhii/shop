@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  get ':category/products' => 'products#index', as: 'category_products'
+
   resources :sessions, only: [:new, :create]
   resources :password_resets
   delete 'logout' => 'sessions#destroy'

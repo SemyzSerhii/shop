@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  belongs_to :category
   has_many :reviews, dependent: :destroy
 
   scope :publish, -> { where(in_stock: true) }
