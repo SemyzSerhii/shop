@@ -1,0 +1,8 @@
+<div class="search">
+  <%= form_tag(products_path, method: :get, class: 'input-group') do %>
+    <%= text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control rounded' %>
+    <div class="input-group-append">
+      <%= submit_tag 'Search', class: 'btn btn-outline-primary' %>
+    </div>
+  <% end %>
+</div>

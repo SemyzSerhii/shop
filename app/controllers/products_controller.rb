@@ -7,6 +7,8 @@ class ProductsController < ApplicationController
       if @category = Category.find_by_title(params[:category])
         @products = @category.products
       end
+    elsif params[:search]
+      @products = Product.search(params[:search])
     else
       @products = Product.all.select(&:in_stock)
     end

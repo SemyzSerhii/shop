@@ -11,4 +11,5 @@ AdminUser.create(email: 'admin@example.com', password: 'password', password_conf
 Product.create(title: 'Product1', price: 1,
                short_description: 'Lorem ipsum dolor sit amet, doming putent interpretaris sit te.',
                full_description: 'Lorem ipsum dolor sit amet, doming putent interpretaris sit te.',
-               in_stock: true)
+               in_stock: true, category_id: 1)
+Category.create(title: 'first')
