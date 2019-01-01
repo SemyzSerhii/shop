@@ -12,6 +12,10 @@
 
 <p><%= @product.category.title %></p>
 
+<% @product.images.each do |image| %>
+  <%= image_tag image.img.url %>
+<% end %>
+
 <h3 id="reviews">Reviews</h3>
 <% if @reviews.present? %>
   <div class="reviews"><%= render @reviews %></div>

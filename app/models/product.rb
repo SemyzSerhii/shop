@@ -1,6 +1,8 @@
 class Product < ApplicationRecord
   belongs_to :category
   has_many :reviews, dependent: :destroy
+  has_many :images, dependent: :destroy
+  accepts_nested_attributes_for :images, allow_destroy: true
 
   scope :publish, -> { where(in_stock: true) }
   scope :unpublish, -> { where(in_stock: false) }

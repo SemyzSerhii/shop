@@ -12,7 +12,8 @@ ActiveAdmin.register Product do
 #   permitted
 # end
 
-  permit_params :title, :price, :short_description, :full_description, :in_stock, :category_id
+  permit_params :title, :price, :short_description, :full_description, :in_stock, :category_id, :image_id,
+                images_attributes: [:id, :img]
 
   scope :all
   scope :publish
@@ -37,4 +38,20 @@ ActiveAdmin.register Product do
     product.update(in_stock: false)
     redirect_to admin_product_path(product), notice: 'Product hide in the shop.'
   end
+
+  form multipart: true do |f|
+    f.input :title
+    f.input :price
+    f.input :category_id, as: :select, collection: Category.all
+    f.text_area :short_description
+    f.text_area :full_description
+    f.inputs do
+      f.has_many :images do |t|
+        t.file_field :img
+      end
+    end
+    f.input :in_stock, as: :radio
+    f.actions
+  end
+
 end
