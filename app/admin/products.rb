@@ -13,7 +13,7 @@ ActiveAdmin.register Product do
 # end
 
   permit_params :title, :price, :short_description, :full_description, :in_stock, :category_id, :image_id,
-                images_attributes: [:id, :img]
+                images_attributes: [:id, :img, :_destroy]
 
   scope :all
   scope :publish
@@ -40,17 +40,29 @@ ActiveAdmin.register Product do
   end
 
   form multipart: true do |f|
-    f.input :title
-    f.input :price
-    f.input :category_id, as: :select, collection: Category.all
-    f.text_area :short_description
-    f.text_area :full_description
-    f.inputs do
-      f.has_many :images do |t|
-        t.file_field :img
+    fieldset class: 'inputs' do
+      ol do
+        li f.input :title
+        li f.input :price
+        li f.input :category_id, as: :select, collection: Category.all
+        li do
+          f.label :short_description
+          f.text_area :short_description, rows:10
+        end
+        li do
+          f.label :full_description
+          f.text_area :full_description, rows: 20
+        end
+        li do
+          f.inputs do
+            f.has_many :images, allow_destroy: true do |t|
+              t.file_field :img
+            end
+          end
+        end
+        li f.input :in_stock, as: :radio
       end
     end
-    f.input :in_stock, as: :radio
     f.actions
   end
 
