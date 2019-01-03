@@ -1,4 +1,4 @@
-ActiveAdmin.register Image do
+ActiveAdmin.register Tag do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -12,5 +12,5 @@ ActiveAdmin.register Image do
 #   permitted
 # end
 
-  permit_params :img, :product_id
+  permit_params :product_id, :filter_id, :tag
 end

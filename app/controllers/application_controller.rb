@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_categories
+  before_action :set_categories_filters
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -18,8 +18,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_categories
+  def set_categories_filters
     @categories = Category.all
+    @filters = Filter.all
   end
 
   helper_method :current_user, :redirect_access, :check_access

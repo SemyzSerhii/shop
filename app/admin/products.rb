@@ -13,7 +13,8 @@ ActiveAdmin.register Product do
 # end
 
   permit_params :title, :price, :short_description, :full_description, :in_stock, :category_id, :image_id,
-                images_attributes: [:id, :img, :_destroy]
+                images_attributes: [:id, :img, :_destroy],
+                tags_attributes: [:id, :filter_id, :tag, :_destroy]
 
   scope :all
   scope :publish
@@ -53,13 +54,20 @@ ActiveAdmin.register Product do
           f.label :full_description
           f.text_area :full_description, rows: 20
         end
-        li do
-          f.inputs do
-            f.has_many :images, allow_destroy: true do |t|
-              t.file_field :img
-            end
+
+        f.inputs do
+          f.has_many :images, allow_destroy: true do |t|
+            t.file_field :img
           end
         end
+
+        f.inputs do
+          f.has_many :tags, allow_destroy: true do |t|
+            t.input :filter_id, as: :select, collection: Filter.all
+            t.input :tag
+          end
+        end
+
         li f.input :in_stock, as: :radio
       end
     end
