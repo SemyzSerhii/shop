@@ -13,7 +13,8 @@
 
   <div class="field">
     <%= form.label :rating %>
-    <%= form.number_field :rating %>
+    <%= form.select :rating, options_for_select([1, 2, 3, 4, 5], 5), {},
+                    { id: 'rating', style: 'display: none;' }  %>
   </div>
 
   <div class="field">

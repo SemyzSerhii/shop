@@ -7,10 +7,12 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'stylesheets' %>
   </head>
 
   <body>
-
+  <div class="header-img"><img src="<%= asset_pack_path 'src/images/logo.png'%>" /></div>
   <%= render 'layouts/nav' %>
   <%= nested_categories @categories.arrange %>
   <%= render 'layouts/search' %>

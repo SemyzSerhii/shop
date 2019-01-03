@@ -4,7 +4,10 @@
   </li>
   <% if current_user %>
     <li class="nav-item">
-      <%= link_to current_user.name, user_path(current_user.id), class: 'nav-link' %>
+      <%= link_to user_path(current_user.id), class: 'nav-link' do %>
+        <i class="fa fa-user-o" aria-hidden="true"></i>
+        <%= current_user.name %>
+      <% end %>
     </li>
   <% else %>
     <li class="nav-item">

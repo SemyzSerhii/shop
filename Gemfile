@@ -71,3 +71,5 @@ gem 'devise'
 gem 'recaptcha'
 # for nested categories
 gem 'ancestry'
+
+gem 'webpacker', '~> 3.5'
