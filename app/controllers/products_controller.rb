@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_categories_filters
 
   # GET /products
   # GET /products.json

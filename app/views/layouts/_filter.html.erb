@@ -4,7 +4,7 @@
   <section>
     <ul>
       <h5><%= filter.title %></h5>
-      <% filter.tags.each do |tag| %>
+      <% filter.tags.uniq { |f| f.tag }.each do |tag| %>
         <li><%= tag.tag %></li>
       <% end %>
     </ul>
