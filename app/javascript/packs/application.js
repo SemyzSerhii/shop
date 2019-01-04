@@ -7,14 +7,15 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import 'bootstrap/dist/js/bootstrap'
-
 require.context('../src/images/', true, /\.(gif|jpg|png|svg)$/i)
 
 // jquery
 import $ from 'jquery'
 global.$ = $
 global.jQuery = $
+require('jquery-ui')
+
+import 'bootstrap/dist/js/bootstrap'
 
 import '../src/javascripts/stars.js'
 import '../src/javascripts/jquery.barrating.min.js'
