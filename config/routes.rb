@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  get ':page' => 'pages#show', as: 'page'
+
   resources :users do
     member do
       get 'reviews'

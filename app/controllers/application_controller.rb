@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   def set_categories_filters
     @categories = Category.all
     @filters = Filter.all
+    @pages = Page.all
   end
 
   helper_method :current_user, :redirect_access, :check_access

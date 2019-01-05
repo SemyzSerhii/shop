@@ -2,6 +2,13 @@
   <li class="nav-item">
     <%= link_to 'Home', root_path, class: 'nav-link'  %>
   </li>
+
+  <% @pages.each do |page| %>
+    <li class="nav-item">
+      <%= link_to page.title, page, class: 'nav-link' %>
+    </li>
+  <% end %>
+
   <% if current_user %>
     <li class="nav-item">
       <%= link_to user_path(current_user.id), class: 'nav-link' do %>
