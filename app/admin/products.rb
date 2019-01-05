@@ -48,7 +48,7 @@ ActiveAdmin.register Product do
         li f.input :category_id, as: :select, collection: Category.all
         li do
           f.label :short_description
-          f.text_area :short_description, rows:10
+          f.text_area :short_description, rows: 10
         end
         li do
           f.label :full_description

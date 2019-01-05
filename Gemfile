@@ -67,6 +67,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # admin
 gem 'activeadmin'
 gem 'devise'
+gem 'tinymce-rails'
 # for review form
 gem 'recaptcha'
 # for nested categories
