@@ -47,12 +47,10 @@ ActiveAdmin.register Product do
         li f.input :price
         li f.input :category_id, as: :select, collection: Category.all
         li do
-          f.label :short_description
-          f.text_area :short_description, rows: 10
+          f.input :short_description, input_html: { rows: 5 }
         end
         li do
-          f.label :full_description
-          f.text_area :full_description, rows: 20
+          f.input :full_description, input_html: { class: 'tinymce' }
         end
 
         f.inputs do

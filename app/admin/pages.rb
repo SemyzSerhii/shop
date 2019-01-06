@@ -19,7 +19,7 @@ ActiveAdmin.register Page do
       ol do
         li f.input :title
         li do
-          f.text_area :body, rows: 20, class: 'tinymce'
+          f.input :body, input_html: { class: 'tinymce' }
         end
       end
     end

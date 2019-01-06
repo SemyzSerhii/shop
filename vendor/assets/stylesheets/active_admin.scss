@@ -15,3 +15,8 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+#page_body_input .label,
+#product_full_description_input .label {
+  float: none;
+}
