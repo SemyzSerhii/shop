@@ -16,7 +16,7 @@
   <%= image_tag image.img.url %>
 <% end %>
 
-<%= render 'rating', product: product %>
+<%= render 'rating', product: @product %>
 
 <h3 id="reviews">Reviews</h3>
 <% if @reviews.present? %>

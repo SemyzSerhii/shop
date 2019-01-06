@@ -10,9 +10,13 @@
       <div class="product-grid">
         <div class="product-image">
           <%= link_to product do %>
-            <% num = 1; product.images.first(2).each do |image| %>
-              <%= image_tag image.img.url, class: "pic-#{num}" %>
-              <% num += 1 %>
+            <% if product.images.present? %>
+              <% num = 1; product.images.first(2).each do |image| %>
+                <%= image_tag image.img.url, class: "pic-#{num}" %>
+                <% num += 1 %>
+              <% end %>
+            <% else %>
+              <img src="<%= asset_pack_path 'src/images/default-image.jpg'%>" class="pic-1"/>
             <% end %>
           <% end %>
           <ul class="social">
