@@ -21,6 +21,7 @@ class ReviewsController < ApplicationController
       @review.status = false
       respond_to do |format|
         if verify_recaptcha(model: @review) && @review.save
+          change_rating
           format.html { redirect_to @product, notice: 'Review was successfully created.' }
         else
           format.html { render :_form}
@@ -38,6 +39,7 @@ class ReviewsController < ApplicationController
       respond_to do |format|
         @review.status = false
         if verify_recaptcha(model: @review) && @review.update(review_params)
+          change_rating
           format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully updated.' }
         else
           format.html { render :_form }
@@ -54,6 +56,7 @@ class ReviewsController < ApplicationController
     if check_access(@review)
       @review = @product.reviews.find(params[:id])
       @review.destroy
+      change_rating
       respond_to do |format|
         format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully destroyed.' }
       end
@@ -83,4 +86,17 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:product_id, :rating, :text, :user_id)
   end
+
+  def change_rating
+    @product.update_columns(rating: calculate_rating.round(2))
+  end
+
+  def calculate_rating
+    if @product.reviews.present?
+      @product.reviews.inject(0) { |sum, mark| sum + mark.rating.to_f } / @product.reviews.size
+    else
+      0
+    end
+  end
+
 end

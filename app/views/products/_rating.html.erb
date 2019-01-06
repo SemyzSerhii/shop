@@ -1,0 +1,41 @@
+<ul class="rating">
+  <% if product.rating.present? %>
+    <% case product.rating.round(0) when 5 %>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+    <% when 4 %>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star disable"></li>
+    <% when 3 %>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star disable"></li>
+      <li class="fa fa-star disable"></li>
+    <% when 2 %>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star disable"></li>
+      <li class="fa fa-star disable"></li>
+      <li class="fa fa-star disable"></li>
+    <% else %>
+      <li class="fa fa-star"></li>
+      <li class="fa fa-star disable"></li>
+      <li class="fa fa-star disable"></li>
+      <li class="fa fa-star disable"></li>
+      <li class="fa fa-star disable"></li>
+    <% end %>
+  <% else %>
+    <li class="fa fa-star disable"></li>
+    <li class="fa fa-star disable"></li>
+    <li class="fa fa-star disable"></li>
+    <li class="fa fa-star disable"></li>
+    <li class="fa fa-star disable"></li>
+  <% end %>
+</ul>

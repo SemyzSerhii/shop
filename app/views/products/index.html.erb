@@ -4,9 +4,31 @@
 <h1>Products</h1>
 
 <div class="product">
+  <div class="row">
   <% @products.each do |product| %>
-    <h5><%= link_to product.title, product %></h5>
-    <p><%= product.price %></p>
-    <p><%= product.short_description %></p>
+    <div class="col-md-3 col-sm-6">
+      <div class="product-grid">
+        <div class="product-image">
+          <%= link_to product do %>
+            <% num = 1; product.images.first(2).each do |image| %>
+              <%= image_tag image.img.url, class: "pic-#{num}" %>
+              <% num += 1 %>
+            <% end %>
+          <% end %>
+          <ul class="social">
+            <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <%= link_to product.title, product %>
+          <div class="price"><%= product.price %></div>
+          <%= render 'rating', product: product %>
+          <a class="add-to-cart" href="">+ Add To Cart</a>
+          <p><%= product.short_description %></p>
+        </div>
+      </div>
+    </div>
   <% end %>
+  </div>
 </div>
+
