@@ -1,7 +1,7 @@
 /* Header */
 #header {
   display: flex;
-  height: auto;
+  height: 150px;
   margin: 15px 0;
   .search {
     margin: auto;
@@ -38,6 +38,7 @@
 
 /* Container */
 #container {
+  min-height: calc(100vh - 240px);
   margin-bottom: 15px;
   #sidebar {
     margin: 0 35px;
@@ -49,6 +50,9 @@
         max-width: 500px;
         height: auto;
       }
+      p {
+        margin: 0;
+      }
     }
     .review {
       padding: 10px;
@@ -56,14 +60,28 @@
       p {
         margin: 0;
       }
+      .date {
+        color: #999;
+      }
+      .action {
+        display: inline-block;
+        vertical-align: top;
+        padding-left: 10px;
+        a:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
-
+ .rc-anchor {
+   margin-bottom: 10px;
+ }
 }
 
 /* Footer */
 footer {
   margin-bottom: 20px;
+  height: 25px;
   .github {
     p {
       display: inline-block;

@@ -12,6 +12,6 @@
   <% end %>
   <p class="date float-right"><%= review.created_at.strftime("%F %H:%M") %></p>
   <h5><%= review.user.name %></h5>
-  <strong><%= review.rating %> stars</strong>
+  <strong><%= pluralize(review.rating, "star")  %></strong>
   <p><%= review.text %></p>
 </div>
