@@ -124,7 +124,7 @@
     opacity:1;
 }
 
-.product-grid .rating{
+.rating{
     color:#007bff;
     font-size:12px;
     padding:0;
@@ -134,7 +134,7 @@
     z-index:-1;
 }
 
-.product-grid .rating li.disable{
+.rating li.disable{
     color:rgba(0,0,0,.2);
 }
 
