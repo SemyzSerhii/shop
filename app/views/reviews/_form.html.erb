@@ -11,20 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :rating %>
+  <div class="form-group">
     <%= form.select :rating, options_for_select([1, 2, 3, 4, 5], 5), {},
                     { id: 'rating', style: 'display: none;' }  %>
   </div>
 
-  <div class="field">
-    <%= form.label :text %>
-    <%= form.text_area :text %>
+  <div class="form-group">
+    <%= form.text_area :text, placeholder: 'Review', class: 'form-control'  %>
   </div>
 
   <%= recaptcha_tags %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-outline-primary' %>
   </div>
 <% end %>

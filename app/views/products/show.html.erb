@@ -1,22 +1,25 @@
 <%= render 'layouts/notice' %>
 <%= render 'layouts/alert' %>
 
-<h2><%= @product.title %></h2>
+<div class="product">
+  <h2><%= @product.title %></h2>
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
+  <p>
+    <strong>Price:</strong>
+    <%= @product.price %>
+  </p>
 
-<p><%= @product.full_description %></p>
+  <%= render 'rating', product: @product %>
+  <% if @product.rating.present? %>
+    <p>Rating: <%= @product.rating %> / <%= @product.reviews.size %></p>
+  <% end %>
 
-<p><%= @product.category.title %></p>
+  <p><%= @product.full_description.html_safe %></p>
 
-<% @product.images.each do |image| %>
-  <%= image_tag image.img.url %>
-<% end %>
-
-<%= render 'rating', product: @product %>
+  <% @product.images.each do |image| %>
+    <%= image_tag image.img.url, class: 'img-thumbnail' %>
+  <% end %>
+</div>
 
 <h3 id="reviews">Reviews</h3>
 <% if @reviews.present? %>

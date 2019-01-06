@@ -1,10 +1,17 @@
-<div class="review">
-  <p><%= review.user.name %></p>
-  <p><%= review.rating %></p>
-  <p><%= review.text %></p>
-
+<div class="review border rounded shadow-sm bg-white">
   <% if check_access(review) %>
-    <p><%= link_to 'Edit', edit_product_review_path(@product, review) %></p>
-    <p><%= link_to 'Destroy', [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <div class="action float-right">
+      <%= link_to edit_product_review_path(@product, review) do %>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to [review.product, review],
+                  method: :delete, data: { confirm: 'Are you sure?'} do %>
+        <i class="fa fa-times" aria-hidden="true"></i>
+      <% end %>
+    </div>
   <% end %>
+  <p class="date float-right"><%= review.created_at.strftime("%F %H:%M") %></p>
+  <h5><%= review.user.name %></h5>
+  <strong><%= review.rating %> stars</strong>
+  <p><%= review.text %></p>
 </div>
