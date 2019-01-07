@@ -1,17 +1,19 @@
-<div class="review border rounded shadow-sm bg-white">
-  <% if check_access(review) %>
-    <div class="action float-right">
-      <%= link_to edit_product_review_path(@product, review) do %>
-        <i class="fa fa-pencil" aria-hidden="true"></i>
-      <% end %>
-      <%= link_to [review.product, review],
-                  method: :delete, data: { confirm: 'Are you sure?'} do %>
-        <i class="fa fa-times" aria-hidden="true"></i>
-      <% end %>
-    </div>
-  <% end %>
-  <p class="date float-right"><%= review.created_at.strftime("%F %H:%M") %></p>
-  <h5><%= review.user.name %></h5>
-  <strong><%= pluralize(review.rating, "star")  %></strong>
-  <p><%= review.text %></p>
-</div>
+<% cache review do %>
+  <div class="review border rounded shadow-sm bg-white">
+    <% if check_access(review) %>
+      <div class="action float-right">
+        <%= link_to edit_product_review_path(@product, review) do %>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        <% end %>
+        <%= link_to [review.product, review],
+                    method: :delete, data: { confirm: 'Are you sure?'} do %>
+          <i class="fa fa-times" aria-hidden="true"></i>
+        <% end %>
+      </div>
+    <% end %>
+    <p class="date float-right"><%= review.created_at.strftime("%F %H:%M") %></p>
+    <h5><%= review.user.name %></h5>
+    <strong><%= pluralize(review.rating, "star")  %></strong>
+    <p><%= review.text %></p>
+  </div>
+<% end %>

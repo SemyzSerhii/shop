@@ -14,15 +14,19 @@
   </thead>
 
   <tbody>
-  <% @reviews.each do |review| %>
-    <tr>
-      <td><%= link_to review.product.title, product_path(review.product.id) %></td>
-      <td><%= review.rating %></td>
-      <td><%= review.text %></td>
-      <td><%= review.status ? 'Published' : 'Moderator`s Check' %></td>
-      <td><%= link_to 'Edit', edit_product_review_path(review.product.id, review) %></td>
-      <td><%= link_to 'Destroy', [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+  <% cache @reviews do %>
+    <% @reviews.each do |review| %>
+      <% cache review do %>
+        <tr>
+          <td><%= link_to review.product.title, product_path(review.product.id) %></td>
+          <td><%= review.rating %></td>
+          <td><%= review.text %></td>
+          <td><%= review.status ? 'Published' : 'Moderator`s Check' %></td>
+          <td><%= link_to 'Edit', edit_product_review_path(review.product.id, review) %></td>
+          <td><%= link_to 'Destroy', [review.product, review], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
   <% end %>
   </tbody>
 </table>

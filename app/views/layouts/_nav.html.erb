@@ -4,10 +4,14 @@
       <%= link_to 'Home', root_path, class: 'nav-link'  %>
     </li>
 
-    <% @pages.each do |page| %>
-      <li class="nav-item">
-        <%= link_to page.title, page, class: 'nav-link' %>
-      </li>
+    <% cache @pages do %>
+      <% @pages.each do |page| %>
+        <% cache page do %>
+          <li class="nav-item">
+            <%= link_to page.title, page, class: 'nav-link' %>
+          </li>
+        <% end %>
+      <% end %>
     <% end %>
 
     <% if current_user %>

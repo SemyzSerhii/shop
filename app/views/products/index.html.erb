@@ -3,34 +3,41 @@
 
 <div class="products">
   <div class="row">
-  <% @products.each do |product| %>
-    <div class="col-md-3 col-sm-6">
-      <div class="product-grid">
-        <div class="product-image">
-          <%= link_to product do %>
-            <% if product.images.present? %>
-              <% num = 1; product.images.first(2).each do |image| %>
-                <%= image_tag image.img.url, class: "pic-#{num}" %>
-                <% num += 1 %>
-              <% end %>
-            <% else %>
-              <img src="<%= asset_pack_path 'src/images/default-image.jpg'%>" class="pic-1"/>
-            <% end %>
-          <% end %>
-          <ul class="social">
-            <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-          </ul>
-        </div>
-        <div class="product-content">
-          <%= link_to product.title, product %>
-          <div class="price"><%= product.price %></div>
-          <%= render 'rating', product: product %>
-          <a class="add-to-cart" href="">+ Add To Cart</a>
-          <p><%= product.short_description %></p>
-        </div>
-      </div>
-    </div>
-  <% end %>
+    <% cache @products do %>
+      <% @products.each do |product| %>
+        <% cache product do %>
+          <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+              <div class="product-image">
+                <%= link_to product do %>
+                  <% if product.images.present? %>
+                    <% num = 1; product.images.first(2).each do |image| %>
+                      <%= image_tag image.img.url, class: "pic-#{num}" %>
+                      <% num += 1 %>
+                    <% end %>
+                  <% else %>
+                    <img src="<%= asset_pack_path 'src/images/default-image.jpg'%>" class="pic-1"/>
+                  <% end %>
+                <% end %>
+                <ul class="social">
+                  <li>
+                    <%= link_to line_items_path(product_id: product), data: { tip: 'Add to Cart' } do %>
+                      <i class="fa fa-shopping-cart"></i>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+              <div class="product-content">
+                <%= link_to product.title, product %>
+                <div class="price"><%= product.price %></div>
+                <%= render 'rating', product: product %>
+                <%= link_to '+ Add To Cart', line_items_path(product_id: product), class: 'add-to-cart' %>
+                <p><%= product.short_description %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>
-

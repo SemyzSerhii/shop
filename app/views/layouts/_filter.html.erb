@@ -1,12 +1,16 @@
 <h4>Filter:</h4>
 
-<% @filters.each do |filter| %>
-  <section>
-    <ul>
-      <h5><%= filter.title %></h5>
-      <% filter.tags.uniq { |f| f.tag }.each do |tag| %>
-        <li><%= tag.tag %></li>
-      <% end %>
-    </ul>
-  </section>
+<% cache @filters do %>
+  <% @filters.each do |filter| %>
+    <% cache filter do %>
+      <section>
+        <ul>
+          <h5><%= filter.title %></h5>
+          <% filter.tags.uniq { |f| f.tag }.each do |tag| %>
+            <li><%= tag.tag %></li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+  <% end %>
 <% end %>
