@@ -40,6 +40,46 @@ ActiveAdmin.register Product do
     redirect_to admin_product_path(product), notice: 'Product hide in the shop.'
   end
 
+  index as: :grid, columns: 4 do |product|
+    link_to product.images.present? ? image_tag(product.images.first.img.url(:thumb)) : content_tag(:span, product.title), admin_product_path(product)
+  end
+
+  show do
+    panel "Product" do
+      attributes_table_for product do
+        row :id
+        row :title
+        row :price
+        row :short_description
+        row :full_description do |product|
+          product.full_description.html_safe
+        end
+        row :in_stock
+        row :category
+        row :created_at
+        row :updated_at
+        row :rating
+      end
+
+      table_for product.images do
+        column 'Path', :img
+        column 'Image' do |product|
+          image_tag product.img.url(:thumb)
+        end
+        column :created_at
+        column :updated_at
+      end
+
+      table_for product.tags do
+        column :filter
+        column :tag
+        column :created_at
+        column :updated_at
+      end
+    end
+    active_admin_comments
+  end
+
   form multipart: true do |f|
     fieldset class: 'inputs' do
       ol do
@@ -55,7 +95,9 @@ ActiveAdmin.register Product do
 
         f.inputs do
           f.has_many :images, allow_destroy: true do |t|
-            t.file_field :img
+            t.input :img, as: :file,
+                    hint: t.object.img.present? ? image_tag(t.object.img.url(:thumb)) : content_tag(:span, 'No image')
+            t.input :img_cache, as: :hidden
           end
         end
 
