@@ -9,7 +9,7 @@
     <%= @product.price %>
   </p>
 
-  <%= render 'rating', product: @product %>
+  <ul class="rating" data-index="<%= @product.rating ? @product.rating.round(0) : 0 %>"></ul>
   <% if @product.rating.present? %>
     <p>Rating: <%= @product.rating %> / <%= @product.reviews.size %></p>
   <% end %>

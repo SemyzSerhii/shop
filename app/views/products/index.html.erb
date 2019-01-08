@@ -30,7 +30,7 @@
               <div class="product-content">
                 <%= link_to product.title, product %>
                 <div class="price"><%= product.price %></div>
-                <%= render 'rating', product: product %>
+                <ul class="rating" data-index="<%= product.rating ? product.rating.round(0) : 0 %>"></ul>
                 <%= link_to '+ Add To Cart', line_items_path(product_id: product), class: 'add-to-cart' %>
                 <p><%= product.short_description %></p>
               </div>

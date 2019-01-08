@@ -19,3 +19,4 @@ import 'bootstrap/dist/js/bootstrap'
 
 import '../src/javascripts/stars.js'
 import '../src/javascripts/jquery.barrating.min.js'
+import '../src/javascripts/rating.js'
