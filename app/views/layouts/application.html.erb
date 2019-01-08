@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Shop</title>
+    <title><%= "#{@page_title} - " if @page_title.present? %>
+      <%= "#{@category.title} - " if @category.present? %>
+      Shop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 

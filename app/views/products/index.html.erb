@@ -21,7 +21,7 @@
                 <% end %>
                 <ul class="social">
                   <li>
-                    <%= link_to line_items_path(product_id: product), data: { tip: 'Add to Cart' } do %>
+                    <%= button_to line_items_path(product_id: product), data: { tip: 'Add to Cart' } do %>
                       <i class="fa fa-shopping-cart"></i>
                     <% end %>
                   </li>
@@ -31,7 +31,7 @@
                 <%= link_to product.title, product %>
                 <div class="price"><%= product.price %></div>
                 <ul class="rating" data-index="<%= product.rating ? product.rating.round(0) : 0 %>"></ul>
-                <%= link_to '+ Add To Cart', line_items_path(product_id: product), class: 'add-to-cart' %>
+                <%= button_to '+ Add To Cart', line_items_path(product_id: product), class: 'add-to-cart' %>
                 <p><%= product.short_description %></p>
               </div>
             </div>

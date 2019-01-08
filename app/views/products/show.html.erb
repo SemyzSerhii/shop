@@ -1,8 +1,10 @@
+<% content_for :title do %>
+<% end %>
 <%= render 'layouts/notice' %>
 <%= render 'layouts/alert' %>
 
 <div class="product">
-  <h2><%= @product.title %></h2>
+  <h2><%= @page_title = @product.title %></h2>
 
   <p>
     <strong>Price:</strong>
@@ -16,8 +18,12 @@
 
   <p><%= @product.full_description.html_safe %></p>
 
-  <% @product.images.each do |image| %>
-    <%= image_tag image.img.url, class: 'img-thumbnail' %>
+  <% cache @product.images do %>
+    <% @product.images.each do |image| %>
+      <% cache image do %>
+        <%= image_tag image.img.url, class: 'img-thumbnail' %>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 
