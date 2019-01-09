@@ -40,8 +40,12 @@ ActiveAdmin.register Product do
     redirect_to admin_product_path(product), notice: 'Product hide in the shop.'
   end
 
-  index as: :grid, columns: 4 do |product|
-    link_to product.images.present? ? image_tag(product.images.first.img.url(:thumb)) : content_tag(:span, product.title), admin_product_path(product)
+  index as: :block do |product|
+    div for: product do
+      resource_selection_cell product
+      h3  link_to product.title, admin_product_path(product), selecteble: true
+      div product.images.present? ? image_tag(product.images.first.img.url(:thumb)) : content_tag(:span, product.short_description)
+    end
   end
 
   show do
@@ -60,21 +64,29 @@ ActiveAdmin.register Product do
         row :updated_at
         row :rating
       end
+    end
 
-      table_for product.images do
-        column 'Path', :img
-        column 'Image' do |product|
-          image_tag product.img.url(:thumb)
+    if product.images.present?
+      panel "Images" do
+        table_for product.images do
+          column 'Path', :img
+          column 'Image' do |product|
+            image_tag product.img.url(:thumb)
+          end
+          column :created_at
+          column :updated_at
         end
-        column :created_at
-        column :updated_at
       end
+    end
 
-      table_for product.tags do
-        column :filter
-        column :tag
-        column :created_at
-        column :updated_at
+    if product.tags.present?
+      panel "Tags" do
+        table_for product.tags do
+          column :filter
+          column :tag
+          column :created_at
+          column :updated_at
+        end
       end
     end
     active_admin_comments

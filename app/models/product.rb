@@ -4,10 +4,10 @@ class Product < ApplicationRecord
   has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
 
-  has_many :tags
+  has_many :tags, dependent: :destroy
   accepts_nested_attributes_for :tags, allow_destroy: true
 
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
   before_destroy :check_referenced_by_line_item
 
   scope :publish, -> { where(in_stock: true) }

@@ -20,3 +20,19 @@
 #product_full_description_input .label {
   float: none;
 }
+.index_content {
+  .product {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: solid 1px #8a949e;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    overflow: hidden;
+    h3 {
+      margin-top: 0;
+    }
+  }
+}

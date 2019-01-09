@@ -42,4 +42,16 @@ ActiveAdmin.register Image do
       active_admin_comments
     end
   end
+
+  form multipart: true do |f|
+    fieldset class: 'inputs' do
+      ol do
+        li f.input :product
+        li f.input :img, as: :file,
+                   hint: f.object.img.present? ? image_tag(f.object.img.url(:thumb)) : content_tag(:span, 'No image')
+
+      end
+    end
+    f.actions
+  end
 end
