@@ -19,6 +19,8 @@ class Product < ApplicationRecord
   validates :short_description, presence: true, length: { minimum: 10, maximum: 100 }
   validates :full_description, presence: true, length: { minimum: 20, maximum: 5000 }
 
+  before_save :change_title
+
   def to_param
     [id, title.parameterize].join("-")
   end

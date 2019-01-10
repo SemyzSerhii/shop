@@ -34,14 +34,15 @@ ActiveAdmin.register Filter do
         row :created_at
         row :updated_at
       end
-
-      table_for filter.tags do
-        column :product
-        column :tag do |tag|
-          link_to tag.tag, admin_tag_path(tag)
+      if filter.tags.present?
+        table_for filter.tags do
+          column :product
+          column :tag do |tag|
+            link_to tag.tag, admin_tag_path(tag)
+          end
+          column :created_at
+          column :updated_at
         end
-        column :created_at
-        column :updated_at
       end
     end
     active_admin_comments

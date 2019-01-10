@@ -23,7 +23,7 @@
   <main id="container">
     <div class="row">
       <div class="col-auto" id="sidebar">
-        <ul class="nav flex-column nav-pills">
+        <ul class="list-group">
           <%= nested_categories @categories.arrange %>
         </ul>
         <%= render 'layouts/filter' %>

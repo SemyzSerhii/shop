@@ -42,6 +42,29 @@
   margin-bottom: 15px;
   #sidebar {
     margin: 0 35px;
+    padding: 0;
+    width: 200px;
+    ul {
+      padding-left: 0;
+    }
+    .nested_categories {
+      display: none;
+      li {
+        padding-left: 30px;
+        vertical-align: middle;
+      }
+      .nested_categories {
+        li {
+          padding-left: 40px;
+        }
+      }
+    }
+    .list-group {
+      margin-bottom: 10px !important;
+      i {
+        float: right;
+      }
+    }
   }
   .container {
     .product {

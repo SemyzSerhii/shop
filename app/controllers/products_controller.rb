@@ -7,6 +7,9 @@ class ProductsController < ApplicationController
     if params[:category]
       if @category = Category.find_by_title(params[:category])
         @products = @category.products
+        @category.children.each do |category|
+          @products += category.products
+        end
       end
     elsif params[:search]
       @products = Product.search(params[:search])

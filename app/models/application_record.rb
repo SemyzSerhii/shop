@@ -4,4 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
   def self.search(search)
     Product.where('title ILIKE :search', search: "%#{search}%")
   end
+
+  def change_title
+    self.title = self.title.capitalize
+  end
 end
