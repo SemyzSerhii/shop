@@ -6,30 +6,40 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "Recent Users" do
-          ul do
-            User.last(5).map do |user|
-              li link_to(user.name, admin_user_path(user))
-            end
+          table_for User.last(5).each do
+            column(:name) { |user| link_to(user.name, admin_user_path(user)) }
+            column(:email)
+            column("Reviews") { |user| user.reviews.size }
           end
         end
       end
 
       column do
         panel "Recent Reviews" do
-          ul do
-            Review.last(5).map do |review|
-              li link_to(review.rating, admin_review_path(review))
-            end
+          table_for Review.last(5).each do
+            column(:user)
+            column(:product)
+            column(:text)
+            column(:rating) { |review| link_to(review.rating, admin_review_path(review)) }
+            column(:status)
           end
         end
       end
 
       column do
         panel "Recent Products" do
-          ul do
-            Product.last(5).map do |product|
-              li link_to(product.title, admin_product_path(product))
+          table_for Product.last(5).each do
+            column(:title) { |product| link_to(product.title, admin_product_path(product)) }
+            column(:price)
+            column("Product") do |product|
+              if product.images.present?
+                image_tag(product.images.first.img.url(:thumb))
+              else
+                content_tag(:span, product.short_description)
+              end
             end
+            column(:in_stock)
+            column(:category)
           end
         end
       end

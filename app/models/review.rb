@@ -6,5 +6,5 @@ class Review < ApplicationRecord
   scope :unpublish, -> { where(status: false) }
 
   validates :rating, inclusion: 1..5, presence: true
-  validates :text, presence: true, length: { minimum: 10, maximum: 1000 }
+  validates :text, presence: true, length: { minimum: 10, maximum: 500 }
 end

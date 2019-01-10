@@ -89,6 +89,20 @@ ActiveAdmin.register Product do
         end
       end
     end
+
+    if product.reviews.present?
+      panel "Reviews" do
+        table_for product.reviews do
+          column :user
+          column :rating do |review|
+            link_to(review.rating, admin_review_path(review))
+          end
+          column :text
+          column :created_at
+          column :updated_at
+        end
+      end
+    end
     active_admin_comments
   end
 

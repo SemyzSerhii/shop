@@ -11,9 +11,9 @@
               <div class="product-image">
                 <%= link_to product do %>
                   <% if product.images.present? %>
-                    <% num = 1; product.images.first(2).each do |image| %>
-                      <%= image_tag image.img.url, class: "pic-#{num}" %>
-                      <% num += 1 %>
+                    <% count = product.images.size >= 2 ? 2 : 1 %>
+                    <% count.times do |num| %>
+                      <%= image_tag product.images[num].img.url, class: "pic-#{num + 1}" %>
                     <% end %>
                   <% else %>
                     <img src="<%= asset_pack_path 'src/images/default-image.jpg'%>" class="pic-1"/>

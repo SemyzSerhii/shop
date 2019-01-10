@@ -37,4 +37,48 @@ ActiveAdmin.register User do
     user.update(access: true)
     redirect_to admin_user_path(user), notice: 'User was unblocked.'
   end
+
+  index do
+    selectable_column
+    column :id
+    column :name, sortable: :name do |user|
+      link_to user.name, admin_user_path(user)
+    end
+    column :email
+    column :access
+    column("Reviews") { |user| user.reviews.size }
+    column :created_at
+    column :updated_at
+    actions dropdown: true
+  end
+
+  show do
+    panel "User" do
+      attributes_table_for user do
+        row :id
+        row :name
+        row :email
+        row :access
+        row :password_digest
+        row :password_reset_token
+        row :password_reset_sent_at
+        row :created_at
+        row :updated_at
+      end
+    end
+
+    if user.reviews.present?
+      panel "Reviews" do
+        table_for user.reviews do
+          column :rating do |review|
+            link_to(review.rating, admin_review_path(review))
+          end
+          column :text
+          column :created_at
+          column :updated_at
+        end
+      end
+    end
+    active_admin_comments
+  end
 end

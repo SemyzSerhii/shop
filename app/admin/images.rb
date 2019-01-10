@@ -18,7 +18,9 @@ ActiveAdmin.register Image do
     selectable_column
     column :id
     column :product
-    column 'Path', :img
+    column 'Path', :img do |img|
+      link_to img.img, admin_image_path(img)
+    end
     column 'Image' do |product|
       image_tag product.img.url(:thumb)
     end

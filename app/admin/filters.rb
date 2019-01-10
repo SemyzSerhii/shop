@@ -14,6 +14,18 @@ ActiveAdmin.register Filter do
 
   permit_params :title
 
+  index do
+    selectable_column
+    column :id
+    column :title, sortable: :title do |filter|
+      link_to filter.title, admin_filter_path(filter)
+    end
+    column("Tags") { |user| user.tags.size }
+    column :created_at
+    column :updated_at
+    actions dropdown: true
+  end
+
   show do
     panel "Filter" do
       attributes_table_for filter do
@@ -25,7 +37,9 @@ ActiveAdmin.register Filter do
 
       table_for filter.tags do
         column :product
-        column :tag
+        column :tag do |tag|
+          link_to tag.tag, admin_tag_path(tag)
+        end
         column :created_at
         column :updated_at
       end
