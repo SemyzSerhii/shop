@@ -11,6 +11,9 @@ class ProductsController < ApplicationController
           @products += category.products
         end
       end
+    elsif params[:tag]
+      @products = Product.tagged_with(params[:tag], any: true)
+      puts
     elsif params[:search]
       @products = Product.search(params[:search])
     else

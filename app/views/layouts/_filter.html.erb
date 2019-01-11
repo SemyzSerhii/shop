@@ -1,16 +1,25 @@
-<h4>Filter:</h4>
+<div class="filter">
+  <h4>Filter:</h4>
 
-<% cache @filters do %>
-  <% @filters.each do |filter| %>
-    <% cache filter do %>
-      <section>
-        <ul>
-          <h5><%= filter.title %></h5>
-          <% filter.tags.uniq { |f| f.tag }.each do |tag| %>
-            <li><%= tag.tag %></li>
-          <% end %>
-        </ul>
-      </section>
+  <%= @filter if @filter.present? %>
+
+  <% cache @filters do %>
+    <%= form_tag products_path, method: :get do %>
+      <% @filters.each do |filter| %>
+        <% cache filter do %>
+          <section>
+            <ul>
+              <% if filter.tag_list.present? %>
+                <h5><%= filter.title %></h5>
+                <% filter.tag_list.each do |tag| %>
+                  <li><%= check_box_tag  "tag[]", tag %><%= tag %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </section>
+        <% end %>
+      <% end %>
+      <%= submit_tag 'Filter', class: 'btn btn-outline-primary' %>
     <% end %>
   <% end %>
-<% end %>
+</div>
