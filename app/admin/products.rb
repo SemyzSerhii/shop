@@ -12,9 +12,9 @@ ActiveAdmin.register Product do
 #   permitted
 # end
 
-  permit_params :title, :price, :short_description, :full_description, :in_stock, :category_id, :image_id,
-                images_attributes: [:id, :img, :_destroy],
-                tags_attributes: [:id, :filter_id, :tag, :_destroy]
+  permit_params :title, :price, :short_description, :full_description, :in_stock,
+                :category_id, :image_id, tag_list: [],
+                images_attributes: [:id, :img, :_destroy]
 
   scope :all
   scope :publish
@@ -63,6 +63,7 @@ ActiveAdmin.register Product do
         row :created_at
         row :updated_at
         row :rating
+        row :tag_list
       end
     end
 
@@ -73,17 +74,6 @@ ActiveAdmin.register Product do
           column 'Image' do |product|
             image_tag product.img.url(:thumb)
           end
-          column :created_at
-          column :updated_at
-        end
-      end
-    end
-
-    if product.tags.present?
-      panel "Tags" do
-        table_for product.tags do
-          column :filter
-          column :tag
           column :created_at
           column :updated_at
         end
@@ -127,11 +117,10 @@ ActiveAdmin.register Product do
           end
         end
 
-        f.inputs do
-          f.has_many :tags, allow_destroy: true do |t|
-            t.input :filter_id, as: :select, collection: Filter.all
-            t.input :tag
-          end
+        @filters = Filter.all
+        @filters.each do |filter|
+          h3 filter.title
+          f.input :tag_list, as: :check_boxes, multiple: true, collection: filter.tag_list
         end
 
         li f.input :in_stock, as: :radio

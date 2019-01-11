@@ -73,4 +73,7 @@ gem 'recaptcha'
 # for nested categories
 gem 'ancestry'
 
+# tags
+gem 'acts-as-taggable-on', '~> 6.0'
+
 gem 'webpacker', '~> 3.5'

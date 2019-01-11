@@ -65,7 +65,7 @@ ActiveAdmin.register Category do
     active_admin_comments
   end
 
-  form multipart: true do |f|
+  form do |f|
     fieldset class: 'inputs' do
       ol do
         li f.input :title

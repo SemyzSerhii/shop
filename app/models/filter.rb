@@ -1,5 +1,5 @@
 class Filter < ApplicationRecord
-  has_many :tags, dependent: :destroy
+  acts_as_taggable_on :tags
 
   validates :title, presence: true, length: { minimum: 3 }, uniqueness: true
 

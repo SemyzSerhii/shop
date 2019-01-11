@@ -45,7 +45,7 @@ ActiveAdmin.register Image do
     end
   end
 
-  form multipart: true do |f|
+  form do |f|
     fieldset class: 'inputs' do
       ol do
         li f.input :product

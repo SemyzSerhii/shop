@@ -12,7 +12,7 @@ ActiveAdmin.register Filter do
 #   permitted
 # end
 
-  permit_params :title
+  permit_params :title, :tag_list
 
   index do
     selectable_column
@@ -20,7 +20,7 @@ ActiveAdmin.register Filter do
     column :title, sortable: :title do |filter|
       link_to filter.title, admin_filter_path(filter)
     end
-    column("Tags") { |user| user.tags.size }
+    column :tag_list
     column :created_at
     column :updated_at
     actions dropdown: true
@@ -33,19 +33,21 @@ ActiveAdmin.register Filter do
         row :title
         row :created_at
         row :updated_at
-      end
-      if filter.tags.present?
-        table_for filter.tags do
-          column :product
-          column :tag do |tag|
-            link_to tag.tag, admin_tag_path(tag)
-          end
-          column :created_at
-          column :updated_at
-        end
+        row :tag_list
       end
     end
     active_admin_comments
   end
 
+  form do |f|
+    fieldset class: 'inputs' do
+      ol do
+        li f.input :title
+        li do
+          f.input :tag_list, input_html: { value: f.object.tag_list.to_s }
+        end
+      end
+    end
+    f.actions
+  end
 end
