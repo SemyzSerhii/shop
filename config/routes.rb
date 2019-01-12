@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     member do
       get 'reviews'
     end
-    resources :carts, only: :show
   end
 
+  resources :carts, only: :show
   resources :line_items
 
   resources :products, only: [:index, :show] do

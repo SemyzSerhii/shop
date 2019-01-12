@@ -1,7 +1,7 @@
 <div class="menu">
   <ul class="nav">
     <li class="nav-item">
-      <%= link_to 'Home', root_path, class: 'nav-link'  %>
+      <%= link_to 'Home', root_path, class: 'nav-link' %>
     </li>
 
     <% cache @pages do %>
@@ -19,6 +19,11 @@
         <%= link_to user_path(current_user.id), class: 'nav-link' do %>
           <i class="fa fa-user-o" aria-hidden="true"></i>
           <%= current_user.name %>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to cart_path(@cart), class: 'nav-link' do %>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
         <% end %>
       </li>
     <% else %>

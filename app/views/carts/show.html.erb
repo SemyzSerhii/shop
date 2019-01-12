@@ -1,6 +1,9 @@
+<%= render 'layouts/notice' %>
+<%= render 'layouts/alert' %>
+
 <h2><%= @page_title = 'Your Cart' %></h2>
 <ul>
   <% @cart.line_items.each do |item| %>
-    <li><%= item.product.title %></li>
+    <li><%= item.quantity %> &times; <%= item.product.title %></li>
   <% end %>
 </ul>

@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery prepend: true, with: :exception
+
+  include CurrentCart
+  before_action :set_cart
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
