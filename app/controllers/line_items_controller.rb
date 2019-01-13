@@ -1,5 +1,6 @@
 class LineItemsController < InheritedResources::Base
   before_action :set_categories_filters
+  before_action :set_line_item, only: :destroy
 
   def create
     if current_user &.access
@@ -12,6 +13,14 @@ class LineItemsController < InheritedResources::Base
       end
     else
       redirect_to root_path, alert: 'Log in'
+    end
+  end
+
+
+  def destroy
+    @line_item.destroy
+    respond_to do |format|
+      format.html { redirect_to cart_path(@cart), notice: 'Product deleted.' }
     end
   end
 

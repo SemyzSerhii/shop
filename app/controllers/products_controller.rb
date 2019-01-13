@@ -5,7 +5,10 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     if params[:category]
-      if @category = Category.find_by_title(params[:category])
+      @category = Category.find_by_title(params[:category])
+      if @category.nil?
+        redirect_to root_path, alert: 'Invalid category'
+      else
         @products = @category.products
         @category.children.each do |category|
           @products += category.products

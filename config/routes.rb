@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :carts, only: :show
+  resources :carts
   resources :line_items
 
   resources :products, only: [:index, :show] do

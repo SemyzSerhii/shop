@@ -2,8 +2,39 @@
 <%= render 'layouts/alert' %>
 
 <h2><%= @page_title = 'Your Cart' %></h2>
-<ul>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Subtotal</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
   <% @cart.line_items.each do |item| %>
-    <li><%= item.quantity %> &times; <%= item.product.title %></li>
+    <tr>
+      <td><%= link_to item.product.title, item.product %></td>
+      <td><%= item.quantity %></td>
+      <td><%= number_to_currency(item.product.price) %></td>
+      <td><%= number_to_currency(item.total_price) %></td>
+      <td><%= link_to item, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-times" aria-hidden="true"></i>
+          <% end %>
+      </td>
+    </tr>
   <% end %>
-</ul>
+  <tr class="font-weight-bold">
+    <td></td>
+    <td></td>
+    <td>Total</td>
+    <td><%= number_to_currency(@cart.total_price) %></td>
+    <td></td>
+  </tr>
+  </tbody>
+</table>
+
+<%= button_to 'Empty cart', @cart, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-primary' %>

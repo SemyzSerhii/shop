@@ -80,7 +80,7 @@
     display: inline-block;
 }
 
-.product-grid .cart li a {
+.product-grid .cart li .add {
     color: #fff;
     background-color: #333;
     font-size: 16px;
@@ -92,9 +92,12 @@
     display: block;
     position: relative;
     transition: all .3s ease-in-out;
+    border-width: 0;
+    border-style: none;
+    cursor: pointer;
 }
 
-.product-grid .cart li a:hover {
+.product-grid .cart li .add:hover {
     color: #fff;
     background-color: #007bff;
 }
@@ -187,6 +190,17 @@
     color: #000;
     font-size: 13px;
     font-weight: 600;
+    background-color: #fff;
+    border-width: 0;
+    border-style: none;
+    cursor: pointer;
+}
+.product-grid .add-to-cart:hover {
+    color: #007bff;
+}
+.product-grid .add-to-cart:focus,
+.product-grid .add:focus{
+    outline: 0;
 }
 
 @media only screen and (max-width: 990px) {

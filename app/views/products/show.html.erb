@@ -8,7 +8,7 @@
 
   <p>
     <strong>Price:</strong>
-    <%= @product.price %>
+    <%= number_to_currency(@product.price) %>
   </p>
 
   <ul class="rating" data-index="<%= @product.rating ? @product.rating.round(0) : 0 %>"></ul>
@@ -17,6 +17,8 @@
   <% end %>
 
   <p><%= @product.full_description.html_safe %></p>
+
+  <%= button_to '+ Add To Cart', line_items_path(product_id: @product), class: 'btn btn-outline-primary' %>
 
   <% cache @product.images do %>
     <% @product.images.each do |image| %>
