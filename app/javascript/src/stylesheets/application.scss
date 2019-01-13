@@ -106,6 +106,24 @@
  .g-recaptcha {
    margin-bottom: 10px;
  }
+
+  .quantity {
+    form {
+      display: inline-block;
+      button {
+        border-width: 0;
+        border-style: none;
+        cursor: pointer;
+        background: none;
+        &:hover {
+          color: #007bff;
+        }
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+  }
 }
 
 /* Footer */

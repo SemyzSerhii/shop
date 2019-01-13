@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :carts
   resources :line_items
+  post 'line_items/:id/minus', to: 'line_items#minus_quantity', as: 'line_item_minus'
 
   resources :products, only: [:index, :show] do
     resources :reviews
