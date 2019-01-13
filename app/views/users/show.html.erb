@@ -11,6 +11,9 @@
     <%= link_to 'My reviews', reviews_user_path(@user.id) %>
   </li>
   <li class="nav-item">
+    <%= link_to 'My orders', orders_path %>
+  </li>
+  <li class="nav-item">
     <%= link_to 'Exit', logout_path, method: :delete %>
   </li>
 </ul>

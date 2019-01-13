@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :orders
+  post 'orders/:id', to: 'orders#destroy'
   resources :carts
   resources :line_items
   post 'line_items/:id/minus', to: 'line_items#minus_quantity', as: 'line_item_minus'

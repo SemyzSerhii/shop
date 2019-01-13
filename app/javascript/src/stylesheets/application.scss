@@ -39,7 +39,7 @@
 /* Container */
 #container {
   min-height: calc(100vh - 240px);
-  margin-bottom: 15px;
+  padding: 20px;
   #sidebar {
     margin: 0 35px;
     padding: 0;
@@ -106,7 +106,6 @@
  .g-recaptcha {
    margin-bottom: 10px;
  }
-
   .quantity {
     form {
       display: inline-block;
@@ -122,6 +121,16 @@
           outline: 0;
         }
       }
+    }
+  }
+  .link:hover {
+    text-decoration: none;
+  }
+  .cart_action {
+    display: flex;
+    justify-content: space-between;
+    form {
+      display: inline-block;
     }
   }
 }

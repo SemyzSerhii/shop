@@ -43,6 +43,9 @@ class LineItemsController < InheritedResources::Base
 
   def set_line_item
     @line_item = LineItem.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 end
 

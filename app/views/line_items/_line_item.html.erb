@@ -5,18 +5,24 @@
 <% end %>
   <td><%= link_to line_item.product.title, line_item.product %></td>
   <td class="quantity">
-    <%= button_to line_items_path(product_id: line_item.product), remote: true do %>
-      <i class="fa fa-plus"></i>
-    <% end %>
-    <%= line_item.quantity %>
-    <%= button_to line_item_minus_path(line_item), metod: :post, remote: true do %>
-      <i class="fa fa-minus" aria-hidden="true"></i>
+    <% if @order.present? %>
+      <%= line_item.quantity %>
+    <% else %>
+      <%= button_to line_items_path(product_id: line_item.product), remote: true do %>
+        <i class="fa fa-plus"></i>
+      <% end %>
+      <%= line_item.quantity %>
+      <%= button_to line_item_minus_path(line_item), metod: :post, remote: true do %>
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      <% end %>
     <% end %>
   </td>
   <td><%= number_to_currency(line_item.product.price) %></td>
   <td><%= number_to_currency(line_item.total_price) %></td>
+<% unless @order.present? %>
   <td><%= link_to line_item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
       <i class="fa fa-times" aria-hidden="true"></i>
     <% end %>
   </td>
+<% end %>
 </tr>
