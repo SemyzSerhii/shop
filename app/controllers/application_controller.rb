@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     @categories = Category.all
     @filters = Filter.all
     @pages = Page.all
+    @settings = Setting.all
   end
 
   helper_method :current_user, :redirect_access, :check_access

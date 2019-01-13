@@ -36,9 +36,20 @@
   margin: auto;
 }
 
+.shop-contacts {
+  margin: auto;
+  .setting {
+    margin: 0;
+    &:after {
+      content: attr(data-name)attr(data-domain)attr(data-tld);
+    }
+  }
+}
+
+
 /* Container */
 #container {
-  min-height: calc(100vh - 240px);
+  min-height: calc(100vh - 250px);
   padding: 20px;
   #sidebar {
     margin: 0 35px;

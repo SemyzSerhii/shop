@@ -1,0 +1,14 @@
+<div class="shop-contacts">
+  <% cache @settings do %>
+    <% @settings.each do |setting| %>
+      <% cache setting do %>
+        <p class="setting"
+           data-name="<%= setting.set_value.first(2) %>"
+           data-tld="<%= setting.set_value.last(2) %>"
+           data-domain="<%= setting.set_value[2..-3] %>">
+          <%= setting.set_key %>:
+        </p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
