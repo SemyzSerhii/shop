@@ -12,6 +12,14 @@ ActiveAdmin.register_page "Dashboard" do
             column("Reviews") { |user| user.reviews.size }
           end
         end
+
+        panel "Recent orders" do
+          table_for Order.last(5).each do
+            column(:id) { |order| link_to(order.id, admin_order_path(order.id)) }
+            column(:user)
+            column(:address)
+          end
+        end
       end
 
       column do
@@ -43,6 +51,7 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
       end
+
     end
     # Here is an example of a simple dashboard with columns and panels.
     #

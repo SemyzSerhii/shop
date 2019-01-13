@@ -31,7 +31,7 @@
 
 <p>
   <strong>Status:</strong>
-  <%= @order.status %>
+  <%= @order.status.empty? ? 'In processing' : @order.status %>
 </p>
 
 <% if @order.comment.present? %>
