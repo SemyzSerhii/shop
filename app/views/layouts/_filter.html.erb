@@ -3,23 +3,20 @@
 
   <%= @filter if @filter.present? %>
 
-  <% cache @filters do %>
-    <%= form_tag products_path, method: :get do %>
-      <% @filters.each do |filter| %>
-        <% cache filter do %>
-          <section>
-            <ul>
-              <% if filter.tag_list.present? %>
-                <h5><%= filter.title %></h5>
-                <% filter.tag_list.each do |tag| %>
-                  <li><%= check_box_tag  "tag[]", tag %><%= tag %></li>
-                <% end %>
-              <% end %>
-            </ul>
-          </section>
-        <% end %>
-      <% end %>
-      <%= submit_tag 'Filter', class: 'btn btn-outline-primary' %>
+  <%= form_tag products_path, method: :get do %>
+    <% @filters.each do |filter| %>
+      <section>
+        <ul>
+          <% if filter.tag_list.present? %>
+            <h5><%= filter.title %></h5>
+            <% filter.tag_list.each do |tag| %>
+              <%= @tag %>
+              <li><%= check_box_tag 'tag[]', tag, params[:tag].present? ? params[:tag].include?(tag) : false,
+                                    id: tag, onchange: 'this.form.submit();' %><%= tag %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </section>
     <% end %>
   <% end %>
 </div>
