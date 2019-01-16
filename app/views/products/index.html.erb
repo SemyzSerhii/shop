@@ -1,0 +1,43 @@
+<%= render 'layouts/notice' %>
+<%= render 'layouts/alert' %>
+
+<div class="products">
+  <div class="row">
+    <% cache @products do %>
+      <% @products.each do |product| %>
+        <% cache product do %>
+          <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+              <div class="product-image">
+                <%= link_to product do %>
+                  <% if product.images.present? %>
+                    <% count = product.images.size >= 2 ? 2 : 1 %>
+                    <% count.times do |num| %>
+                      <%= image_tag product.images[num].img.url, class: "pic-#{num + 1}" %>
+                    <% end %>
+                  <% else %>
+                    <img src="<%= asset_pack_path 'src/images/default-image.jpg'%>" class="pic-1"/>
+                  <% end %>
+                <% end %>
+                <ul class="cart">
+                  <li>
+                    <%= button_to line_items_path(product_id: product), data: { tip: 'Add to Cart' }, class: 'add' do %>
+                      <i class="fa fa-shopping-cart"></i>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+              <div class="product-content">
+                <%= link_to product.title, product %>
+                <div class="price"><%= number_to_currency(product.price) %></div>
+                <ul class="rating" data-index="<%= product.rating ? product.rating.round(0) : 0 %>"></ul>
+                <%= button_to '+ Add To Cart', line_items_path(product_id: product), class: 'add-to-cart' %>
+                <p><%= product.short_description %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

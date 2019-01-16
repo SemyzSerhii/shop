@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h3><%= @page_title = @user.name %></h3>
+<p><%= @user.email %></p>
+
+<ul class="nav flex-column">
+  <li class="nav-item">
+    <%= link_to 'Change data', edit_user_path(@user.id) %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'My reviews', reviews_user_path(@user.id) %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'My orders', orders_path %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Exit', logout_path, method: :delete %>
+  </li>
+</ul>
+

@@ -1,0 +1,44 @@
+<% content_for :title do %>
+<% end %>
+<%= render 'layouts/notice' %>
+<%= render 'layouts/alert' %>
+
+<div class="product">
+  <h2><%= @page_title = @product.title %></h2>
+
+  <p>
+    <strong>Price:</strong>
+    <%= number_to_currency(@product.price) %>
+  </p>
+
+  <ul class="rating" data-index="<%= @product.rating ? @product.rating.round(0) : 0 %>"></ul>
+  <% if @product.rating.present? %>
+    <p>Rating: <%= @product.rating %> / <%= @product.reviews.size %></p>
+  <% end %>
+
+  <p><%= @product.full_description.html_safe %></p>
+
+  <%= button_to '+ Add To Cart', line_items_path(product_id: @product), class: 'btn btn-outline-primary' %>
+
+  <% cache @product.images do %>
+    <% @product.images.each do |image| %>
+      <% cache image do %>
+        <%= image_tag image.img.url, class: 'img-thumbnail' %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<h3 id="reviews">Reviews</h3>
+<% if @reviews.present? %>
+  <div class="reviews"><%= render @reviews %></div>
+<% else %>
+  <p>No reviews.</p>
+<% end %>
+
+<h3>Add a review:</h3>
+<% if current_user %>
+  <%= render 'reviews/form' %>
+<% else %>
+  <p><%= link_to 'Log in', new_session_path %> or <%= link_to 'Sign up', new_user_path %> to leave a review.</p>
+<% end %>

@@ -1,0 +1,6 @@
+<li class="list-group-item">
+  <%= link_to category.title, category_products_path(category.title) %>
+  <% if category.has_children? %>
+    <i class="fa fa-angle-down" aria-hidden="true"></i>
+  <% end %>
+</li>

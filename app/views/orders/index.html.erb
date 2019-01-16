@@ -1,0 +1,41 @@
+<%= render 'layouts/notice' %>
+<%= render 'layouts/alert' %>
+
+<h1><%= @page_title = 'Orders' %></h1>
+
+<% if current_user.orders.present? %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Order</th>
+      <th>Address</th>
+      <th>Status</th>
+      <th>Admin comment</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% current_user.orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.address %></td>
+        <td><%= order.status.empty? ? 'In processing' : order.status %></td>
+        <td><%= order.comment %></td>
+        <td class="nav">
+          <%= link_to 'Show', order, class: 'nav-link' %>
+        <% if order.status == 'In processing' %>
+          <%= link_to 'Edit', edit_order_path(order), class: 'nav-link' %>
+          <%= link_to 'Destroy', order, method: :post, data: { confirm: 'Are you sure?' }, class: 'nav-link' %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No orders</p>
+  <%= link_to cart_path(@cart), class: 'link' do %>
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+  <% end %>
+<% end %>
