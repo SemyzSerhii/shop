@@ -18,5 +18,25 @@
         </ul>
       </section>
     <% end %>
+
+    <h5>Price</h5>
+    <% value_min = params[:min_price].present? ? params[:min_price] : @min_price %>
+    <% value_max = params[:max_price].present? ? params[:max_price] : @max_price %>
+
+    <strong>Min</strong>
+    <%= range_field_tag('min_price', value = value_min,
+                        options= { min: @min_price, max: value_max, step: 0.01, class: 'price-range' })%>
+    <input type="number" id="min" value ="<%= value_min %>" class="form-control"
+           min="<%= @min_price %>" max="<%= value_max %>" step="0.01"
+           data-index="<%= @min_price %>">
+
+    <strong>Max</strong>
+    <%= range_field_tag('max_price', value = value_max,
+                        options= { min: value_min, max: @max_price, step: 0.01, class: 'price-range' })%>
+    <input type="number" id="max" value ="<%= value_max %>" class="form-control"
+           min="<%= value_min %>" max="<%= @max_price %>" step="0.01"
+           data-index="<%= @max_price %>">
+
+    <%= submit_tag 'Filter', class: 'btn btn-outline-primary' %>
   <% end %>
 </div>

@@ -25,6 +25,9 @@ class ApplicationController < ActionController::Base
     @filters = Filter.all
     @pages = Page.all
     @settings = Setting.all
+    @all_publish_product = Product.all.publish
+    @min_price = @all_publish_product.order('price').first.price
+    @max_price = @all_publish_product.order('price').last.price
   end
 
   helper_method :current_user, :redirect_access, :check_access
