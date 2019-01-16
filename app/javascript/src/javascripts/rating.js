@@ -4,14 +4,17 @@ $(document).on('turbolinks:load', function() {
         items[i].id = i
         var rating = document.getElementById(i).dataset.index
         var disable = 5 - rating
-        for (var star = 0; star < 5; star++) {
-            var el = document.createElement('li')
-            el.setAttribute('class','fa fa-star')
-            if (disable !== 0) {
-                el.classList.add('disable')
-                disable--
+        var stars = items[i].getElementsByClassName('fa-star')
+        if (stars.length === 0) {
+            for (var star = 0; star < 5; star++) {
+                var el = document.createElement('li')
+                el.setAttribute('class','fa fa-star')
+                if (disable !== 0) {
+                    el.classList.add('disable')
+                    disable--
+                }
+                items[i].insertBefore(el, items[i].childNodes[0])
             }
-            items[i].insertBefore(el, items[i].childNodes[0])
         }
     }
 })
