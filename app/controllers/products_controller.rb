@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
         end
       end
     elsif params[:tag]
-      @products =  @all_publish_product.tagged_with(params[:tag], any: true)
+      @products =  @all_publish_product.tagged_with(params[:tag])
     elsif params[:search]
       @products =  @all_publish_product.search(params[:search])
     else
@@ -24,6 +24,11 @@ class ProductsController < ApplicationController
 
     @products = @products.where('price >= ?', params[:min_price]) if params[:min_price]
     @products = @products.where('price <= ?', params[:max_price]) if params[:max_price]
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @products.pluck(:title) }
+    end
   end
 
   # GET /products/1

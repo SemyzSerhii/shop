@@ -46,6 +46,21 @@
   }
 }
 
+/* search autocomplete */
+.ui-autocomplete {
+  list-style-type: none;
+  background-color: #fff;
+  border: 1px solid #c5c5c5;
+  width: 230px;
+  padding-left: 10px;
+  overflow: auto;
+  z-index: 1;
+  li {
+    margin: 0;
+    cursor: pointer;
+  }
+}
+
 
 /* Container */
 #container {
