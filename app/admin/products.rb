@@ -119,8 +119,10 @@ ActiveAdmin.register Product do
 
         @filters = Filter.all
         @filters.each do |filter|
-          h3 filter.title
-          f.input :tag_list, as: :check_boxes, multiple: true, collection: filter.tag_list
+          if filter.tag_list.present?
+            h3 filter.title
+            f.input :tag_list, as: :check_boxes, multiple: true, collection: filter.tag_list
+          end
         end
 
         li f.input :in_stock, as: :radio
