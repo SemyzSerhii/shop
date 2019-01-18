@@ -25,6 +25,8 @@ class ProductsController < ApplicationController
     @products = @products.where('price >= ?', params[:min_price]) if params[:min_price]
     @products = @products.where('price <= ?', params[:max_price]) if params[:max_price]
 
+    @products = Kaminari.paginate_array(@products).page(params[:page]).per(12) if @products.present?
+
     respond_to do |format|
       format.html
       format.json { render json: @products.pluck(:title) }
@@ -36,7 +38,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @review = Review.new
-    @reviews = @product.reviews.select(&:status)
+    @reviews = Kaminari.paginate_array(@product.reviews.select(&:status)).page(params[:page]).per(10)
 
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path

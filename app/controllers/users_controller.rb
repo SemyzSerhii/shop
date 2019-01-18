@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def reviews
     if current_user
-      @reviews = current_user.reviews
+      @reviews = current_user.reviews.page(params[:page]).per(10)
     else
       redirect_access(root_path)
     end

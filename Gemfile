@@ -77,3 +77,6 @@ gem 'ancestry'
 gem 'acts-as-taggable-on', '~> 6.0'
 
 gem 'webpacker', '~> 3.5'
+
+# gem for pagination
+gem 'kaminari'
