@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_categories_filters
+  before_action :last_viewed_products, only: :show
+  after_action :set_last_viewed_products, only: :show
 
   # GET /products
   # GET /products.json
@@ -36,11 +38,30 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @product = Product.find(params[:id])
     @review = Review.new
     @reviews = Kaminari.paginate_array(@product.reviews.select(&:status)).page(params[:page]).per(10)
 
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
+  end
+
+  private
+
+  def last_viewed_products
+    @product = Product.find(params[:id])
+    if cookies[:products].present? && cookies[:products] != @product.id.to_s
+      last_viewed_products = cookies[:products].to_s.split(',').last(4)
+      cookies.delete :products
+      cookies[:products] = last_viewed_products.join(',')
+      @last_viewed_products = Product.where(id: last_viewed_products)
+    end
+  end
+
+  def set_last_viewed_products
+    if cookies[:products].present?
+      cookies[:products] += ", #{@product.id}" unless cookies[:products].include? @product.id.to_s
+    else
+      cookies[:products] = @product.id
+    end
   end
 end

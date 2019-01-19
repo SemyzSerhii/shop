@@ -18,7 +18,7 @@
 
   <p><%= @product.full_description.html_safe %></p>
 
-  <%= button_to '+ Add To Cart', line_items_path(product_id: @product), class: 'btn btn-outline-primary' %>
+  <%= button_to '+ Add To Cart', line_items_path(product_id: @product), class: 'form-group btn btn-outline-primary' %>
 
   <% cache @product.images do %>
     <% @product.images.each do |image| %>
@@ -37,9 +37,42 @@
   <p>No reviews.</p>
 <% end %>
 
-<h3>Add a review:</h3>
+<h4>Add a review:</h4>
 <% if current_user %>
-  <%= render 'reviews/form' %>
+  <div class="review-form">
+    <%= render 'reviews/form' %>
+  </div>
 <% else %>
   <p><%= link_to 'Log in', new_session_path %> or <%= link_to 'Sign up', new_user_path %> to leave a review.</p>
+<% end %>
+
+<% if @last_viewed_products.present? %>
+  <div class="last-viewed-products">
+    <h4 class="text-center">Recently viewed products</h4>
+    <div class="row">
+      <% @last_viewed_products.each do |product| %>
+        <% unless product == @product %>
+          <div class="col-md-3 col-sm-6">
+            <div class="product-grid">
+              <h5><%= link_to product.title, product_path(product) %></h5>
+              <strong><%= number_to_currency(product.price) %></strong>
+              <% if product.images.present? %>
+                <div><%= image_tag product.images.first.img.url(:thumb) %></div>
+              <% else %>
+                <p><%= product.short_description %></p>
+              <% end %>
+
+              <ul class="cart">
+                <li>
+                  <%= button_to line_items_path(product_id: product), data: { tip: 'Add to Cart' }, class: 'add' do %>
+                    <i class="fa fa-shopping-cart"></i>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 <% end %>

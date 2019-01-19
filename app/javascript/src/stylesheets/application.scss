@@ -112,9 +112,6 @@
         max-width: 500px;
         height: auto;
       }
-      p {
-        margin: 0;
-      }
     }
     .review {
       padding: 10px;
@@ -133,6 +130,9 @@
           text-decoration: none;
         }
       }
+    }
+    .review-form {
+      margin-bottom: 10px;
     }
   }
  .g-recaptcha {
