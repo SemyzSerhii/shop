@@ -80,3 +80,6 @@ gem 'webpacker', '~> 3.5'
 
 # gem for pagination
 gem 'kaminari'
+
+# mailgun
+gem 'mailgun-ruby', '~>1.1.6'
