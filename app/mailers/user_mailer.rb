@@ -19,4 +19,16 @@ class UserMailer < ApplicationMailer
     }
     mg_client.send_message MAILGUN_DOMAIN, message_params
   end
+
+  def order(order, user)
+    @order = order
+    html = render 'user_mailer/order', order: order
+    mg_client = Mailgun::Client.new API_KEY
+    message_params = { from: user == 'admin' ? order.user.email : ADMIN_EMAIL,
+                       to:   user == 'admin' ? ADMIN_EMAIL : user.email,
+                       subject: "Order#{order.id}",
+                       html: html
+    }
+    mg_client.send_message MAILGUN_DOMAIN, message_params
+  end
 end

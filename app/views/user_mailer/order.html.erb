@@ -1,0 +1,49 @@
+<h2><%= link_to "Order #{@order.id}", order_url(@order.id) %></h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Subtotal</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+    <% @order.line_items.each do |line_item| %>
+      <td><%= link_to line_item.product.title, line_item.product %></td>
+      <td class="quantity">
+        <%= line_item.quantity %>
+      </td>
+      <td><%= number_to_currency(line_item.product.price) %></td>
+      <td><%= number_to_currency(line_item.total_price) %></td>
+      </tr>
+      </tbody>
+      <tr class="font-weight-bold">
+        <td></td>
+        <td></td>
+        <td>Total</td>
+        <td><%= number_to_currency(@order.total_price) %></td>
+      </tr>
+    <% end %>
+</table>
+
+<p>
+  <strong>Address:</strong>
+  <%= @order.address %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @order.status.empty? ? 'In processing' : @order.status %>
+</p>
+
+<% if @order.comment.present? %>
+  <p>
+    <strong>Admin comment:</strong>
+    <%= @order.comment %>
+  </p>
+<% end %>
+
