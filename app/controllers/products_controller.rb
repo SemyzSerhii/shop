@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
     @products = @products.where('price >= ?', params[:min_price]) if params[:min_price]
     @products = @products.where('price <= ?', params[:max_price]) if params[:max_price]
 
-    @products = Kaminari.paginate_array(@products).page(params[:page]).per(12) if @products.present?
+    @products = Kaminari.paginate_array(@products).page(params[:page]).per(12) if @products
 
     respond_to do |format|
       format.html
