@@ -27,5 +27,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   root 'products#index'
+
+  match 'admin/*path' => redirect('/admin'), via: [:get, :post]
+  match '*path' => redirect('/'), via: [:get, :post]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
