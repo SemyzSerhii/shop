@@ -19,30 +19,30 @@ ActiveAdmin.register User do
   scope :unblock
 
   action_item :block, only: :show do
-    link_to 'Block', block_admin_user_path(user), method: :put if user.access
+    link_to 'Block', block_shop_admin_user_path(user), method: :put if user.access
   end
 
   action_item :unblock, only: :show do
-    link_to 'Unblock', unblock_admin_user_path(user), method: :put unless user.access
+    link_to 'Unblock', unblock_shop_admin_user_path(user), method: :put unless user.access
   end
 
   member_action :block, method: :put do
     user = User.find(params[:id])
     user.update(access: false)
-    redirect_to admin_user_path(user), notice: 'User was blocked.'
+    redirect_to shop_admin_user_path(user), notice: 'User was blocked.'
   end
 
   member_action :unblock, method: :put do
     user = User.find(params[:id])
     user.update(access: true)
-    redirect_to admin_user_path(user), notice: 'User was unblocked.'
+    redirect_to shop_admin_user_path(user), notice: 'User was unblocked.'
   end
 
   index do
     selectable_column
     column :id
     column :name, sortable: :name do |user|
-      link_to user.name, admin_user_path(user)
+      link_to user.name, shop_admin_user_path(user)
     end
     column :email
     column :access
@@ -71,7 +71,7 @@ ActiveAdmin.register User do
       panel "Reviews" do
         table_for user.reviews do
           column :rating do |review|
-            link_to(review.rating, admin_review_path(review))
+            link_to(review.rating, shop_admin_review_path(review))
           end
           column :text
           column :created_at

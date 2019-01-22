@@ -19,22 +19,22 @@ ActiveAdmin.register Review do
   scope :unpublish
 
   action_item :publish, only: :show do
-    link_to 'Publish', publish_admin_review_path(review), method: :put unless review.status
+    link_to 'Publish', publish_shop_admin_review_path(review), method: :put unless review.status
   end
 
   action_item :unpublish, only: :show do
-    link_to 'Unpublish', unpublish_admin_review_path(review), method: :put if review.status
+    link_to 'Unpublish', unpublish_shop_admin_review_path(review), method: :put if review.status
   end
 
   member_action :publish, method: :put do
     review = Review.find(params[:id])
     review.update(status: true)
-    redirect_to admin_review_path(review), notice: 'Review was published.'
+    redirect_to shop_admin_review_path(review), notice: 'Review was published.'
   end
 
   member_action :unpublish, method: :put do
     review = Review.find(params[:id])
     review.update(status: false)
-    redirect_to admin_review_path(review), notice: 'Review was unpublished.'
+    redirect_to shop_admin_review_path(review), notice: 'Review was unpublished.'
   end
 end

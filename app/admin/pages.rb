@@ -18,7 +18,7 @@ ActiveAdmin.register Page do
     selectable_column
     column :id
     column :title, sortable: :title do |page|
-      link_to page.title, admin_page_path(page)
+      link_to page.title, shop_admin_page_path(page)
     end
     column 'Body' do |page|
       page.body.html_safe

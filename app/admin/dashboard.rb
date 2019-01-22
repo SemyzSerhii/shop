@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent Users" do
           table_for User.last(5).each do
-            column(:name) { |user| link_to(user.name, admin_user_path(user)) }
+            column(:name) { |user| link_to(user.name, shop_admin_user_path(user)) }
             column(:email)
             column("Reviews") { |user| user.reviews.size }
           end
@@ -15,7 +15,7 @@ ActiveAdmin.register_page "Dashboard" do
 
         panel "Recent orders" do
           table_for Order.last(5).each do
-            column(:id) { |order| link_to(order.id, admin_order_path(order.id)) }
+            column(:id) { |order| link_to(order.id, shop_admin_order_path(order.id)) }
             column(:user)
             column(:address)
           end
@@ -28,7 +28,7 @@ ActiveAdmin.register_page "Dashboard" do
             column(:user)
             column(:product)
             column(:text)
-            column(:rating) { |review| link_to(review.rating, admin_review_path(review)) }
+            column(:rating) { |review| link_to(review.rating, shop_admin_review_path(review)) }
             column(:status)
           end
         end
@@ -37,7 +37,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent Products" do
           table_for Product.last(5).each do
-            column(:title) { |product| link_to(product.title, admin_product_path(product)) }
+            column(:title) { |product| link_to(product.title, shop_admin_product_path(product)) }
             column(:price)
             column("Product") do |product|
               if product.images.present?

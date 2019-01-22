@@ -21,29 +21,29 @@ ActiveAdmin.register Product do
   scope :unpublish
 
   action_item :show_shop, only: :show do
-    link_to 'Show at the shop', show_shop_admin_product_path(product), method: :put unless product.in_stock
+    link_to 'Show at the shop', show_shop_shop_admin_product_path(product), method: :put unless product.in_stock
   end
 
   action_item :hide_in_shop, only: :show do
-    link_to 'Hide in the shop', hide_shop_admin_product_path(product), method: :put if product.in_stock
+    link_to 'Hide in the shop', hide_shop_shop_admin_product_path(product), method: :put if product.in_stock
   end
 
   member_action :show_shop, method: :put do
     product = Product.find(params[:id])
     product.update(in_stock: true)
-    redirect_to admin_product_path(product), notice: 'Product at the shop.'
+    redirect_to shop_admin_product_path(product), notice: 'Product at the shop.'
   end
 
   member_action :hide_shop, method: :put do
     product = Product.find(params[:id])
     product.update(in_stock: false)
-    redirect_to admin_product_path(product), notice: 'Product hide in the shop.'
+    redirect_to shop_admin_product_path(product), notice: 'Product hide in the shop.'
   end
 
   index as: :block do |product|
     div for: product do
       resource_selection_cell product
-      h3  link_to product.title, admin_product_path(product), selecteble: true
+      h3  link_to product.title, shop_admin_product_path(product), selecteble: true
       div product.images.present? ? image_tag(product.images.first.img.url(:thumb)) : content_tag(:span, product.short_description)
     end
   end
@@ -85,7 +85,7 @@ ActiveAdmin.register Product do
         table_for product.reviews do
           column :user
           column :rating do |review|
-            link_to(review.rating, admin_review_path(review))
+            link_to(review.rating, shop_admin_review_path(review))
           end
           column :text
           column :created_at

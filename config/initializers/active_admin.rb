@@ -290,5 +290,12 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+  #
+
+  config.namespace :shop_admin do |admin|
+    admin.site_title = "Shop"
+  end
+
   config.register_javascript 'tinymce.js'
+  config.default_namespace = :shop_admin
 end

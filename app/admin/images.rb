@@ -19,7 +19,7 @@ ActiveAdmin.register Image do
     column :id
     column :product
     column 'Path', :img do |img|
-      link_to img.img, admin_image_path(img)
+      link_to img.img, shop_admin_image_path(img)
     end
     column 'Image' do |product|
       image_tag product.img.url(:thumb)

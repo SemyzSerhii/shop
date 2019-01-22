@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
-  match 'admin/*path' => redirect('/admin'), via: [:get, :post]
+  match 'shop_admin/*path' => redirect('/shop_admin'), via: [:get, :post]
   match '*path' => redirect('/'), via: [:get, :post]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -18,7 +18,7 @@ ActiveAdmin.register Category do
     selectable_column
     column :id
     column :title, sortable: :title do |category|
-      link_to category.title, admin_category_path(category)
+      link_to category.title, shop_admin_category_path(category)
     end
     column :parent
     column("Products") do |category|
@@ -48,7 +48,7 @@ ActiveAdmin.register Category do
         table_for @products do
           column :id
           column :title do |product|
-            link_to product.title, admin_product_path(product)
+            link_to product.title, shop_admin_product_path(product)
           end
           column :price
           column :short_description

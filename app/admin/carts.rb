@@ -19,7 +19,7 @@ ActiveAdmin.register Cart do
       attributes_table_for cart do
         row :id
         row :user do |order|
-          link_to(order.user.name, admin_user_path(order.user))
+          link_to(order.user.name, shop_admin_user_path(order.user))
         end
         row :created_at
         row :updated_at
@@ -30,10 +30,10 @@ ActiveAdmin.register Cart do
       panel "Line_items" do
         table_for cart.line_items do
           column :id do |line_item|
-            link_to(line_item.id, admin_line_item_path(line_item))
+            link_to(line_item.id, shop_admin_line_item_path(line_item))
           end
           column :product do |line_item|
-            link_to(line_item.product.title, admin_product_path(line_item.product))
+            link_to(line_item.product.title, shop_admin_product_path(line_item.product))
           end
           column :quantity
           column :created_at
