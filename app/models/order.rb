@@ -1,6 +1,9 @@
 class Order < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :line_items, dependent: :destroy
+
+  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true, presence: true
+  validates :name, presence: true, length: { minimum: 3 }, uniqueness: true
   validates :address, presence: true, length: { minimum: 10 }
 
   after_save :send_order_user, :send_order_admin
@@ -17,7 +20,7 @@ class Order < ApplicationRecord
   end
 
   def send_order_user
-    UserMailer.order(self, self.user).deliver_now
+    UserMailer.order(self, self.email).deliver_now
   end
 
   def send_order_admin

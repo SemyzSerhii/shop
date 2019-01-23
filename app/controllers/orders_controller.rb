@@ -12,7 +12,11 @@ class OrdersController < InheritedResources::Base
   end
 
   def create
-    params[:order][:user_id] = current_user.id
+    if current_user
+      params[:order][:user_id] = current_user.id
+      params[:order][:email] = current_user.email
+      params[:order][:name] = current_user.name
+    end
     @order = Order.new(order_params)
     @order.status = 'In processing'
     @order.add_line_items_from_cart(@cart)
@@ -66,7 +70,7 @@ class OrdersController < InheritedResources::Base
   end
 
   def order_params
-    params.require(:order).permit(:user_id, :address)
+    params.require(:order).permit(:user_id, :address, :name, :email)
   end
 
   def ensure_cart_isnt_empty

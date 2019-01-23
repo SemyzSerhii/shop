@@ -21,11 +21,6 @@
           <%= current_user.name %>
         <% end %>
       </li>
-      <li class="nav-item">
-        <%= link_to cart_path(@cart), class: 'nav-link' do %>
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart (<%= @count %>)
-        <% end %>
-      </li>
     <% else %>
       <li class="nav-item">
         <%= link_to 'Log in', new_session_path, class: 'nav-link' %>
@@ -34,5 +29,11 @@
         <%= link_to 'Sign up', new_user_path, class: 'nav-link' %>
       </li>
     <% end %>
+
+    <li class="nav-item">
+      <%= link_to cart_path(@cart), class: 'nav-link' do %>
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart (<%= @count %>)
+      <% end %>
+    </li>
   </ul>
 </div>
