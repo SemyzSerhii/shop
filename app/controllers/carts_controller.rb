@@ -10,9 +10,9 @@ class CartsController < InheritedResources::Base
 
   private
 
-    def cart_params
-      params.require(:cart).permit(:user_id)
-    end
+  def cart_params
+    params.require(:cart).permit(:user_id)
+  end
 
   def invalid_cart
     logger.error "Attempt to access invalid cart #{params[:id]}"

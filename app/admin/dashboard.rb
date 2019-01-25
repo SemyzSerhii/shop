@@ -32,9 +32,7 @@ ActiveAdmin.register_page "Dashboard" do
             column(:status)
           end
         end
-      end
 
-      column do
         panel "Recent Products" do
           table_for Product.last(5).each do
             column(:title) { |product| link_to(product.title, shop_admin_product_path(product)) }

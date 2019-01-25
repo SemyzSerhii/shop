@@ -67,4 +67,17 @@ ActiveAdmin.register Review do
       @product = Product.find(@review.product_id)
     end
   end
+
+  form do |f|
+    fieldset class: 'inputs' do
+      ol do
+        li f.input :product
+        li f.input :user
+        li f.input :rating, as: :select, collection: [1, 2, 3, 4, 5]
+        li f.input :text
+        li f.input :status
+      end
+    end
+    f.actions
+  end
 end

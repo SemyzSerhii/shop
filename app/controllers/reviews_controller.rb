@@ -99,5 +99,4 @@ class ReviewsController < ApplicationController
       0
     end
   end
-
 end
