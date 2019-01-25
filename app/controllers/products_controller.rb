@@ -17,11 +17,11 @@ class ProductsController < ApplicationController
         end
       end
     elsif params[:tag]
-      @products =  @all_publish_product.tagged_with(params[:tag])
+      @products = @all_publish_products.tagged_with(params[:tag])
     elsif params[:search]
-      @products =  @all_publish_product.search(params[:search])
+      @products = @all_publish_products.search(params[:search])
     else
-      @products = @all_publish_product
+      @products = @all_publish_products
     end
 
     @products = @products.where('price >= ?', params[:min_price]) if params[:min_price]

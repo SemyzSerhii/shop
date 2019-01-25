@@ -13,7 +13,7 @@
 
   <ul class="rating" data-index="<%= @product.rating ? @product.rating.round(0) : 0 %>"></ul>
   <% if @product.rating.present? %>
-    <p>Rating: <%= @product.rating %> / <%= @product.reviews.size %></p>
+    <p>Rating: <%= @product.rating %> / <%= @product.reviews.select(&:status).size %></p>
   <% end %>
 
   <p><%= @product.full_description.html_safe %></p>
