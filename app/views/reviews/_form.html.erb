@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.select :rating, options_for_select([1, 2, 3, 4, 5], 5), {},
-                    { id: 'rating', style: 'display: none;' }  %>
+    <%= form.select :rating, options_for_select([1, 2, 3, 4, 5], @review.rating ? @review.rating : 5), {},
+                    { id: 'rating', style: 'display: none;'  }  %>
   </div>
 
   <div class="form-group">

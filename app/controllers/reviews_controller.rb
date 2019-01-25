@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
       @review.status = false
       respond_to do |format|
         if verify_recaptcha(model: @review) && @review.save
-          format.html { redirect_to @product, notice: 'Review was successfully created.' }
+          format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully created.' }
         else
           format.html { render :_form}
         end
