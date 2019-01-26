@@ -79,6 +79,21 @@ ActiveAdmin.register User do
         end
       end
     end
+
+    if user.orders.present?
+      panel "Orders" do
+        table_for user.orders do
+          column :id do |order|
+            link_to order.id, shop_admin_order_path(order)
+          end
+          column :address
+          column :status
+          column :comment
+          column :created_at
+          column :updated_at
+        end
+      end
+    end
     active_admin_comments
   end
 end
