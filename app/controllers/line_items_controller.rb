@@ -2,6 +2,9 @@ class LineItemsController < InheritedResources::Base
   before_action :set_categories_filters
   before_action :set_line_item, only: [:minus_quantity, :destroy]
 
+  include CurrentCart
+  before_action :set_cart
+
   def create
     if (current_user &.access) || !current_user
       product = Product.find(params[:product_id])

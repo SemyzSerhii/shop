@@ -3,6 +3,9 @@ class OrdersController < InheritedResources::Base
   before_action :ensure_cart_isnt_empty, only: :new
   before_action :set_order, only: [:edit, :update, :destroy]
 
+  include CurrentCart
+  before_action :set_cart
+
   def index
     @orders = Order.find_by_user_id(current_user.id)
   end

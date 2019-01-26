@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :set_categories_filters
 
+  include CurrentCart
+  before_action :set_cart
+
   def reviews
     if current_user
       @reviews = current_user.reviews.page(params[:page]).per(10)

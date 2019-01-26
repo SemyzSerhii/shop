@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   before_action :set_categories_filters
+
+  include CurrentCart
+  before_action :set_cart
+
   def create
     @user = User.find_by_name(params[:name])
     if @user && @user.authenticate(params[:password])

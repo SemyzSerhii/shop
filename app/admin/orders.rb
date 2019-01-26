@@ -19,10 +19,10 @@ ActiveAdmin.register Order do
       attributes_table_for order do
         row :id
         row :user do |order|
-          link_to(order.user.name, shop_admin_user_path(order.user))
+          order.user ? link_to(order.user.name, shop_admin_user_path(order.user)) : order.name
         end
         row "User email" do |order|
-          p order.user.email
+          p order.email
         end
         row :address
         row :status

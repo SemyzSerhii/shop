@@ -3,6 +3,9 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:edit, :update, :destroy]
   before_action :set_product, only: [ :create, :edit, :update, :destroy]
 
+  include CurrentCart
+  before_action :set_cart
+
   # GET /reviews/new
   def new
     @review = Review.new

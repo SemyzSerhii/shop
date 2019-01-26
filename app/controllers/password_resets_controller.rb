@@ -1,6 +1,9 @@
 class PasswordResetsController < ApplicationController
   before_action :set_categories_filters
 
+  include CurrentCart
+  before_action :set_cart
+
   def create
     user = User.find_by_email(params[:email])
     user.send_password_reset if user

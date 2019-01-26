@@ -3,6 +3,9 @@ class ProductsController < ApplicationController
   before_action :last_viewed_products, only: :show
   after_action :set_last_viewed_products, only: :show
 
+  include CurrentCart
+  before_action :set_cart
+
   # GET /products
   # GET /products.json
   def index

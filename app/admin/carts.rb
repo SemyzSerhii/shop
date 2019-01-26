@@ -18,8 +18,8 @@ ActiveAdmin.register Cart do
     panel "Cart" do
       attributes_table_for cart do
         row :id
-        row :user do |order|
-          link_to(order.user.name, shop_admin_user_path(order.user))
+        row :user do |cart|
+          cart.user ? link_to(cart.user.name, shop_admin_user_path(cart.user)) : ''
         end
         row :created_at
         row :updated_at
