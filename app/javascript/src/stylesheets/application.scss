@@ -105,6 +105,7 @@
     }
   }
   .container {
+    margin: 0;
     .product {
       margin-bottom: 15px;
       img {
@@ -186,3 +187,23 @@ footer {
     }
   }
 }
+
+@media screen and (max-width: 890px) {
+  .container, .table {
+    width: 60% !important;
+  }
+
+  #sidebar {
+    width: 20% !important;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #sidebar {
+    width: 80% !important;
+    margin-bottom: 20px !important;
+  }
+}
+
+

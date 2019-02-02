@@ -23,19 +23,5 @@ ActiveAdmin.register ActsAsTaggableOn::Tag, as: "Tag" do
       end
     end
     active_admin_comments
-  end
-
-  form multipart: true do |f|
-    fieldset class: 'inputs' do
-      ol do
-        li f.input :name
-
-        @products = Product.all
-          if @products.present?
-            f.input :taggings, as: :check_boxes, multiple: true, collection: @products
-          end
-      end
     end
-    f.actions
   end
-end
