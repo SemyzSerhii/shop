@@ -34,6 +34,10 @@
 
 .menu{
   margin: auto;
+  #nav-media {
+    width: 50px;
+    display: none;
+  }
 }
 
 .shop-contacts {
@@ -188,8 +192,33 @@ footer {
   }
 }
 
+@media screen and (max-width: 1060px) {
+  #header {
+    position: relative;
+    z-index: 2;
+    #nav-media {
+      display: block;
+      margin: auto;
+    }
+    .nav {
+      display: none;
+      position: absolute;
+      z-index: 3;
+      width: 100px;
+      background-color: #FFFFFF;
+      border: 1px solid #c5c5c5;
+      li {
+        border-bottom: 1px solid #c5c5c5;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 890px) {
-  .container, .table {
+    .container, .table {
     width: 60% !important;
   }
 
@@ -200,6 +229,11 @@ footer {
 }
 
 @media screen and (max-width: 576px) {
+  #header {
+    flex-direction: column;
+    height: auto;
+  }
+
   #sidebar {
     width: 80% !important;
     margin-bottom: 20px !important;
