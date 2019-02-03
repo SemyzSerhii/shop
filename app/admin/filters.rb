@@ -18,7 +18,7 @@ ActiveAdmin.register Filter do
     selectable_column
     column :id
     column :title, sortable: :title do |filter|
-      link_to filter.title, admin_filter_path(filter)
+      link_to filter.title, shop_admin_filter_path(filter)
     end
     column :tag_list
     column :created_at

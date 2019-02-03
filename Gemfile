@@ -27,6 +27,9 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
 
@@ -77,3 +80,12 @@ gem 'ancestry'
 gem 'acts-as-taggable-on', '~> 6.0'
 
 gem 'webpacker', '~> 3.5'
+
+# gem for pagination
+gem 'kaminari'
+
+# mailgun
+gem 'mailgun-ruby', '~>1.1.6'
+
+# gallery
+gem 'lightbox2-rails'

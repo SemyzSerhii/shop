@@ -1,7 +1,10 @@
 class ReviewsController < ApplicationController
   before_action :set_categories_filters
   before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :set_product, only: [:create, :edit, :update, :destroy]
+  before_action :set_product, only: [ :create, :edit, :update, :destroy]
+
+  include CurrentCart
+  before_action :set_cart
 
   # GET /reviews/new
   def new
@@ -21,8 +24,7 @@ class ReviewsController < ApplicationController
       @review.status = false
       respond_to do |format|
         if verify_recaptcha(model: @review) && @review.save
-          change_rating
-          format.html { redirect_to @product, notice: 'Review was successfully created.' }
+          format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully created.' }
         else
           format.html { render :_form}
         end
@@ -56,8 +58,8 @@ class ReviewsController < ApplicationController
     if check_access(@review)
       @review = @product.reviews.find(params[:id])
       @review.destroy
-      change_rating
       respond_to do |format|
+        change_rating if @review.status
         format.html { redirect_to reviews_user_path(current_user), notice: 'Review was successfully destroyed.' }
       end
     else
@@ -88,15 +90,16 @@ class ReviewsController < ApplicationController
   end
 
   def change_rating
-    @product.update_columns(rating: calculate_rating.round(2))
+    @product.update_columns(rating: calculate_rating)
   end
 
   def calculate_rating
-    if @product.reviews.present?
-      @product.reviews.inject(0) { |sum, mark| sum + mark.rating.to_f } / @product.reviews.size
+    publish_reviews = @product.reviews.select(&:status)
+    if publish_reviews.present?
+      sum = publish_reviews.inject(0) { |sum, mark| sum + mark.rating.to_f }
+      (sum / publish_reviews.size).round(2) if sum > 0
     else
       0
     end
   end
-
 end

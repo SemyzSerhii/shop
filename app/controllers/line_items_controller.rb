@@ -2,8 +2,11 @@ class LineItemsController < InheritedResources::Base
   before_action :set_categories_filters
   before_action :set_line_item, only: [:minus_quantity, :destroy]
 
+  include CurrentCart
+  before_action :set_cart
+
   def create
-    if current_user &.access
+    if (current_user &.access) || !current_user
       product = Product.find(params[:product_id])
       @line_item = @cart.add_product(product)
       if @line_item.save
@@ -15,8 +18,6 @@ class LineItemsController < InheritedResources::Base
       else
         redirect_to root_path, notice: 'Product not added to the cart.'
       end
-    else
-      redirect_to root_path, alert: 'Log in'
     end
   end
 

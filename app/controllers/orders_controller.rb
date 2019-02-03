@@ -3,6 +3,9 @@ class OrdersController < InheritedResources::Base
   before_action :ensure_cart_isnt_empty, only: :new
   before_action :set_order, only: [:edit, :update, :destroy]
 
+  include CurrentCart
+  before_action :set_cart
+
   def index
     @orders = Order.find_by_user_id(current_user.id)
   end
@@ -12,7 +15,11 @@ class OrdersController < InheritedResources::Base
   end
 
   def create
-    params[:order][:user_id] = current_user.id
+    if current_user
+      params[:order][:user_id] = current_user.id
+      params[:order][:email] = current_user.email
+      params[:order][:name] = current_user.name
+    end
     @order = Order.new(order_params)
     @order.status = 'In processing'
     @order.add_line_items_from_cart(@cart)
@@ -66,7 +73,7 @@ class OrdersController < InheritedResources::Base
   end
 
   def order_params
-    params.require(:order).permit(:user_id, :address)
+    params.require(:order).permit(:user_id, :address, :name, :email)
   end
 
   def ensure_cart_isnt_empty

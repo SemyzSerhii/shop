@@ -2,9 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :set_categories_filters
 
+  include CurrentCart
+  before_action :set_cart
+
   def reviews
     if current_user
-      @reviews = current_user.reviews
+      @reviews = current_user.reviews.page(params[:page]).per(10)
     else
       redirect_access(root_path)
     end
@@ -35,7 +38,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    if check_access(@user)
+    if current_user
       respond_to do |format|
         if @user.update(user_params)
           format.html { redirect_to @user, notice: 'User was successfully updated.' }

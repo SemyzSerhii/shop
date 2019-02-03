@@ -203,6 +203,29 @@
     outline: 0;
 }
 
+/*last-viewed-products*/
+
+.last-viewed-products .product-grid {
+    padding: 20px;
+    vertical-align: middle;
+}
+.last-viewed-products .col-md-3 {
+    margin: 0 auto;
+}
+
+.last-viewed-products h4 {
+    margin-bottom: 15px;
+}
+
+.last-viewed-products p {
+    padding-top: 10px;
+    margin-bottom: 0;
+}
+
+.last-viewed-products h5 a:hover {
+    text-decoration: none;
+}
+
 @media only screen and (max-width: 990px) {
     .product-grid {
         margin-bottom: 30px;

@@ -8,12 +8,12 @@
     <% if @order.present? %>
       <%= line_item.quantity %>
     <% else %>
-      <%= button_to line_items_path(product_id: line_item.product), remote: true do %>
-        <i class="fa fa-plus"></i>
-      <% end %>
-      <%= line_item.quantity %>
       <%= button_to line_item_minus_path(line_item), metod: :post, remote: true do %>
         <i class="fa fa-minus" aria-hidden="true"></i>
+      <% end %>
+      <%= line_item.quantity %>
+      <%= button_to line_items_path(product_id: line_item.product), remote: true do %>
+        <i class="fa fa-plus"></i>
       <% end %>
     <% end %>
   </td>

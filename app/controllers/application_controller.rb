@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
+  skip_before_action :verify_authenticity_token
   protect_from_forgery prepend: true, with: :exception
-
-  include CurrentCart
-  before_action :set_cart
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -25,9 +23,9 @@ class ApplicationController < ActionController::Base
     @filters = Filter.all
     @pages = Page.all
     @settings = Setting.all
-    @all_publish_product = Product.all.publish
-    @min_price = @all_publish_product.order('price').first.price
-    @max_price = @all_publish_product.order('price').last.price
+    @all_publish_products = Product.all.publish
+    @min_price = @all_publish_products.order('price').first.price
+    @max_price = @all_publish_products.order('price').last.price
   end
 
   helper_method :current_user, :redirect_access, :check_access

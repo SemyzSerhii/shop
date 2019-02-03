@@ -1,6 +1,7 @@
 <div class="search">
   <%= form_tag(products_path, method: :get, class: 'input-group') do %>
-    <%= text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control rounded-left' %>
+    <%= text_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control rounded-left',
+                       data: { autocomplete_source: Product.order('title').pluck(:title).to_json }%>
     <div class="input-group-append">
       <%= button_tag(type: 'submit', class: 'btn btn-outline-primary') do %>
         <i class='fa fa-search'></i>
